@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TP 3 - Javascript y CSS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="buscaminas.js"></script>
+    <script>
+        Juego.cargarJuego("botonJugar");
+    </script>
+</head>
+<body>
+    
+        <button id="botonJugar"> JUGAR </button>
+        <label for="nivel" >Nivel: </label>
+        
+        <select id="nivel">
+          <option  value="principiante">Principiante</option>
+          <option  value="Intermedio">Intermedio</option>
+          <option  value="Experto">Experto</option>
+        </select>
+        
+        <section id="grilla"> </section>
+</body>
+</html>
