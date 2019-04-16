@@ -9,3 +9,41 @@
 	transition: all .5s;
 	background-color: #3498db;
 }
+
+#grilla .principiante{
+    width: 500px;
+    height: 500px;
+}
+
+#grilla .principiante{
+    width: 500px;
+    height: 500px;
+}
+
+.ContenedorFila{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    
+}
+
+.bloque[bomba="true"]{
+    background-color: red;
+}
+
+p{
+    background-color: chartreuse;
+}
+
+.bloque {
+     vertical-align:middle;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin: 1px;
+    background-color: grey;
+}
+
+.bloque.bombaAlrededor{
+    background-color: green;
+}
