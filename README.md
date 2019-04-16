@@ -9,12 +9,12 @@ Trabajo Practico N°3 de Programacion en Ambiente Web - UNLu
 <p> FALTA SUBIR </p>
 <br>
 <p><b>3) ¿Qué es el CSS box model?</b></p>
-<p> Es un estandar para el diseño de CSS en el cual se considera cada elemento que conforman el HTML como una caja rectangular, la cual posee 4 principales caracteristicas (que se pueden editar):
-  <p> content</p>
-  <p> border</p>
-  <p> padding</p>
-  <p> margin</p>
-</p>
+<p> Es un estandar para el diseño de CSS en el cual se considera cada elemento que conforma el HTML como una caja rectangular, la cual posee 4 principales caracteristicas, que se pueden editar para variar el tamaño y forma del contenido):</p>
+  <p> <u>Content:</u> limita el area del contenido, como texto, imagen, video, etc</p>
+  <p> <u>Padding:</u> Extiende el área del contenido para incluir el relleno del elemento,>
+  <p> <u>Border:</u> pertenece al elemento y sirve para extender el borde por sobre el padding.>
+  <p> <u>Margin:</u> Distancia que guardará con respecto a los demás elementos</p>
+<p>Vale aclarar que cuando se editan las propiedades Width y Height solo se estan refiriendo al contenido de la caja..</p>  
 <br>
 <p><b>4) ¿Cuál es el código que hay que insertar en una hoja de estilo para poder usar WebFonts?</b></p>
 <p> RESPUESTA </p>
