@@ -1,0 +1,27 @@
+@import url(reset.css);
+
+.taTeTi {
+  width: 16vw;
+  background-color:black;
+}
+
+.taTeTi .cuadro {
+  width: 5vw;
+  height: 5vh;
+  margin:1px;
+  display: inline-block;
+  background-color: white;
+  text-align: center;
+  vertical-align: middle;
+  background-color:white;
+ 
+}
+
+
+.taTeTi .cuadro img {
+  width: 5vw;
+  height: 5vh;
+  vertical-align: middle;
+}
+
+
