@@ -3,10 +3,13 @@ Trabajo Practico N°3 de Programacion en Ambiente Web - UNLu
 
 ## Consignas
 <p><b>1) ¿Qué significa que los estilos se apliquen en cascada? ¿cómo aplica la herencia de estilos?</b></p>
-<p> FALTA SUBIR </p>
+<p> El significado de la aplicación de estilos en cascada hace referencia a que seguirá un patrón a la hora de aplicar el estilo a los elementos de forma masiva, el cual tendrá en cuenta las relaciones de herencia entre unos y otros, yendo desde lo más general a lo más específico.</P>
+<p>Esta herencia que determina CSS se basa en qué elementos del HTML cumplen con una determinada característica para aplicarles un estilo particular, y por ende tendrán ese estilo todos los elementos que se consideren dentro del grupo que cumple esas características. Así, para los  elementos que formen parte de varios estilos definidos, se tomara siempre la definición que haya sido mas especifica, y tambien se afectara de igual forma a los proximos elementos que esten dentro de estos antes mencionados.</p>  
+<p>A la hora de aplicar los estilos a un grupo de elementos tiene en cuenta la importancia dentro del código (indicada por el programador), la especificidad (cuantas mas características tenga en cuenta, se aplicará mas particularmente en lugar de tener los estilos mas genericos) y el orden en el código.</p>
 <br>
 <p><b>2) ¿Por qué es necesario utilizar un CSS de Reset?</b></p>
-<p> FALTA SUBIR </p>
+<p> Los Reset son definiciones del CSS para propiedades problemáticas que los diseñadores necesitan unificar desde un principio.</p>
+<p> Son necesarios para limpiar todas las propiedades de CSS que aplican por defecto los navegadores web y que son diferentes en cada uno de ellos. De esta manera, la hoja de estilo que definamos, será lo más homogénea posible en todos los navegadores web que existen, a pesar de sus diferencias. </p>
 <br>
 <p><b>3) ¿Qué es el CSS box model?</b></p>
 <p> Es un estandar para el diseño de CSS en el cual se considera cada elemento que conforma el HTML como una caja rectangular, la cual posee 4 principales caracteristicas, que se pueden editar para variar el tamaño y forma del contenido):</p>
