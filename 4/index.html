@@ -4,22 +4,16 @@
     <meta charset="UTF-8">
     <title>TP 3 - Javascript y CSS</title>
     <link rel="stylesheet" href="style.css">
-    <script src="buscaminas.js"></script>
-    <script>
-        Juego.cargarJuego("botonJugar","nivel");
-    </script>
+    <script src="encuesta.js"></script>
+    <script>Juego.cargarJuego("botonEncuesta","encuesta");</script>
+    
 </head>
 <body>
-    
-        <button id="botonJugar"> JUGAR </button>
-        <label for="nivel" >Nivel: </label>
-        
-        <select id="nivel">
-          <option  value="principiante">Principiante</option>
-          <option  value="Intermedio">Intermedio</option>
-          <option  value="Experto">Experto</option>
-        </select>
-        
-        <section id="grilla"> </section>
+    <main>
+        <p> Ingrese aqui su encuesta en formato Json:</p>
+        <textarea id="jsonText" class="jsonText"></textarea>
+        <button id="botonEncuesta" class="boton"> EMPEZAR ENCUESTA </button>
+        <div id="encuesta"> </div>
+    </main>
 </body>
 </html>

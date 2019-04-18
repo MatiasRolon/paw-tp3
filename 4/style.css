@@ -1,5 +1,5 @@
-#botonJugar{ 
-	display: inline-block; 
+.boton{ 
+	display: block; 
 	padding: 10px 10px;
 	color: white;
 	vertical-align: middle;
@@ -10,45 +10,41 @@
 	background-color: #3498db;
 }
 
-#grilla .principiante{
-    width: 500px;
-    height: 500px;
+.jsonText{
+    width: 300px;
+    height: 300px;
+    text-align: top;
 }
 
-#grilla .principiante{
-    width: 500px;
-    height: 500px;
+.pregunta{
+    //width: 300px;
+    //height: 300px;
+    //display: block;
+    border: 5px;
+    margin: 3px;
+    border-color: black;
+    background-color: cadetblue;
 }
 
-.ContenedorFila{
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
-    
+.pregunta p{
+    font-weight: bold;
 }
 
-.bloque.bomba{
-    background-color: red;
+.pregunta .respuesta{
+    /*display: block;*/
+    margin-right: 20px;
 }
 
-.bloque.numeros{
-    background-color: green;
-        
+.acierto{
+    color: darkgreen;
 }
 
-p{
-    background-color: chartreuse;
+.error{
+    color: darkred;
 }
 
-.bloque {
-     vertical-align:middle;
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    margin: 1px;
-    background-color: grey;
-}
-
-.bloque.bombaAlrededor{
-    background-color: green;
+.resultado{
+    margin-top: 20px;
+    font-size: 30px;
+    display: block;
 }

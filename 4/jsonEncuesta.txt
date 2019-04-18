@@ -1,0 +1,19 @@
+{
+"titulo": "Título del Test",
+"preguntas": [
+{"pregunta": "Pregunta 1",
+"respuestas": ["respuesta 1A", "respuesta 1B", "respuesta 1C", "respuesta 1D"],
+"correctas": [0, 3]},
+{"pregunta": "Pregunta 2",
+"respuestas": ["respuesta 2A", "respuesta 2B", "respuesta 2C", "respuesta 2D"],
+"correctas": [0, 1]},
+{"pregunta": "Pregunta 3",
+"respuestas": ["respuesta 3A", "respuesta 3B", "respuesta 3C", "respuesta 3D"],
+"correctas": [1, 2]},
+{"pregunta": "Pregunta 4",
+"respuestas": ["respuesta 4A", "respuesta 4B", "respuesta 4C", "respuesta 4D"],
+"correctas": [1, 4]}
+],
+"cantidadAPreguntar": "2",
+"tiempoDeTrabajo": "xSegundos"
+}
