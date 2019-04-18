@@ -3,12 +3,22 @@ var Juego = Juego || {},
     console = console || {},
     window = window || {},
     turno = 1,
-    jugadorX, contador, jugadorO, puntajeX, puntajeO;
+    jugadorX, contador, jugadorO, puntajeX, puntajeO, nSection, elementos = 0,empate = true,bandera=false,aux;
 
 
 
+
+puntajeX = 0;
+puntajeO = 0;
 contador = 0;
-Juego.nivelActual = 0;
+
+while(!bandera){
+     aux = prompt("INGRESAR NIVEL 0|1|2|3");
+    if (aux == 1 || aux == 2 || aux == 3 || aux == 0){
+        Juego.nivelActual = aux;
+        bandera = true;
+    }
+}
 
 
 Juego.Armar = function (contenedor) {
@@ -21,16 +31,18 @@ Juego.Armar = function (contenedor) {
         if (typeof Juego.contenedor === "string") {
             Juego.contenedor = document.getElementById(Juego.contenedor);
         }
-        var tSection = document.createElement("section"),
-            nSection = document.createElement("section");
-        tSection.classList.add("taTeTi");
+        var tSection = document.createElement("section");
+
+        nSection = document.createElement("section");
+
+        tSection.classList.add("taTeTi"+Juego.nivelActual);
         nSection.classList.add("puntaje");
         console.log(tSection);
         Juego.contenedor.appendChild(tSection);
         Juego.contenedor.appendChild(nSection);
         tSection.classList.add("jugadores")
         Juego.generarTablero(tSection);
-        Juego.generarPuntaje(nSection);
+        Juego.generarPuntaje(nSection, false);
 
     }
 
@@ -62,7 +74,8 @@ Juego.marcar = function (event) {
         imagenO, imagenX,
         equis = document.querySelectorAll("div.cuadro.marcadaX"),
         circulos = document.querySelectorAll("div.cuadro.marcadaO"),
-        sinmarcar = document.querySelectorAll(".sinmarcar");
+        empate = false;
+
     cuadro.classList.remove("sinmarcar");
 
     if (turno % 2 == 0) {
@@ -71,7 +84,9 @@ Juego.marcar = function (event) {
         cuadro.setAttribute("value", "O");
         cuadro.classList.add("marcadaO");
         cuadro.appendChild(imagenO);
+        cuadro.removeEventListener("click", Juego.marcar);
         turno = turno + 1;
+        elementos = elementos + 1;
         circulos = document.querySelectorAll("div.cuadro.marcadaO");
     } else {
         imagenX = document.createElement("img");
@@ -79,12 +94,14 @@ Juego.marcar = function (event) {
         cuadro.setAttribute("value", "X");
         cuadro.classList.add("marcadaX");
         cuadro.appendChild(imagenX);
+        cuadro.removeEventListener("click", Juego.marcar)
         turno = turno + 1;
         equis = document.querySelectorAll("div.cuadro.marcadaX");
-
+        elementos = elementos + 1;
     }
+    
     //VICTORIA X POR HORIZONTAL
-    if (equis.length >= 3) {
+    if (equis.length >= Juego.niveles[Juego.nivelActual].alto) {
         for (var i = 0; i < (equis.length - 1); i++) {
             for (var j = i + 1; j < equis.length; j++) {
                 if (equis[i].getAttribute("data-x") == equis[j].getAttribute("data-x")) {
@@ -96,14 +113,19 @@ Juego.marcar = function (event) {
 
 
     }
-
-    if (contador == 3) {
+        if (contador >= Juego.niveles[Juego.nivelActual].ancho) {
+        
+        Juego.reiniciar(equis, circulos);
         window.alert("ganado horizontal X");
+        puntajeX = puntajeX + 1;
+        Juego.generarPuntaje(nSection, true);
+
     }
     contador = 0;
 
     //VICTORIA X POR VERTICAL
-    if (equis.length >= 3) {
+    
+    if (equis.length >= Juego.niveles[Juego.nivelActual].alto) {
         for (var i = 0; i < (equis.length - 1); i++) {
             for (var j = i + 1; j < equis.length; j++) {
                 if (equis[i].getAttribute("data-y") == equis[j].getAttribute("data-y")) {
@@ -115,13 +137,20 @@ Juego.marcar = function (event) {
 
 
     }
-    if (contador == 3) {
+    console.log 
+    if (contador >= Juego.niveles[Juego.nivelActual].ancho) {
         window.alert("ganado vertical X");
+        Juego.reiniciar(equis, circulos);
+        puntajeX = puntajeX + 1;
+        Juego.generarPuntaje(nSection, true);
+
     }
 
     contador = 0;
+    
     //VICTORIA X DIAGONAL PRINCIPAL
-    if (equis.length >= 3) {
+    
+    if (equis.length >= Juego.niveles[Juego.nivelActual].alto) {
         for (var i = 0; i < equis.length; i++) {
             if (equis[i].getAttribute("data-x") == equis[i].getAttribute("data-y")) {
 
@@ -131,35 +160,37 @@ Juego.marcar = function (event) {
         }
     }
 
-    if (contador == 3) {
+    if (contador >= Juego.niveles[Juego.nivelActual].ancho) {
         window.alert("ganado diagonal principal X");
+        Juego.reiniciar(equis, circulos);
+        puntajeX = puntajeX + 1;
+        Juego.generarPuntaje(nSection, true);
+
     }
     contador = 0;
+    
     //VICTORIA X DIAGONAL OPUESTA
-    if (equis.length >= 3) {
-        for (var i = 0; i < equis.length; i++) {
-            if (equis[i].getAttribute("data-x") == 0 && equis[i].getAttribute("data-y") == 2) {
-                contador = contador + 1;
-            }
-        }
-        for (var i = 0; i < equis.length; i++) {
-            if (equis[i].getAttribute("data-x") == 1 && equis[i].getAttribute("data-y") == 1) {
-                contador = contador + 1;
-            }
-        }
-        for (var i = 0; i < equis.length; i++) {
-            if (equis[i].getAttribute("data-x") == 2 && equis[i].getAttribute("data-y") == 0) {
-                contador = contador + 1;
-            }
+    
+   if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
+        for (var i=0;i<equis.length;i++){
+            if((Juego.niveles[Juego.nivelActual].alto - equis[i].getAttribute("data-x") - 1) == equis[i].getAttribute("data-y")){
+               contador = contador + 1;
+               }
         }
     }
 
-    if (contador == 3) {
-        window.alert("ganado diagonal opuesta X")
+    if (contador >= Juego.niveles[Juego.nivelActual].ancho) {
+        window.alert("ganado diagonal opuesto X");
+        Juego.reiniciar(equis, circulos);
+        puntajeX = puntajeX + 1;
+        Juego.generarPuntaje(nSection, true);
+
     }
     contador = 0;
+    
     //VICTORIA 0 POR HORIZONTAL
-    if (circulos.length >= 3) {
+    
+    if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
         for (var i = 0; i < (circulos.length - 1); i++) {
             for (var j = i + 1; j < circulos.length; j++) {
                 if (circulos[i].getAttribute("data-x") == circulos[j].getAttribute("data-x")) {
@@ -169,13 +200,17 @@ Juego.marcar = function (event) {
         }
     }
 
-    if (contador == 3) {
+    if (contador >= Juego.niveles[Juego.nivelActual].ancho) {
         window.alert("ganado horizontal O");
+        Juego.reiniciar(equis, circulos);
+        puntajeO = puntajeO + 1;
+        Juego.generarPuntaje(nSection, true);
+
     }
     contador = 0;
 
     //VICTORIA O POR VERTICAL
-    if (circulos.length >= 3) {
+    if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
         for (var i = 0; i < (circulos.length - 1); i++) {
             for (var j = i + 1; j < circulos.length; j++) {
                 if (circulos[i].getAttribute("data-y") == circulos[j].getAttribute("data-y")) {
@@ -186,13 +221,18 @@ Juego.marcar = function (event) {
 
 
     }
-    if (contador == 3) {
+
+    if (contador >= Juego.niveles[Juego.nivelActual].ancho) {
         window.alert("ganado vertical O");
+        Juego.reiniciar(equis, circulos);
+        puntajeO = puntajeO + 1;
+        Juego.generarPuntaje(nSection, true);
+
     }
 
     contador = 0;
     //VICTORIA O DIAGONAL PRINCIPAL
-    if (circulos.length >= 3) {
+    if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
         for (var i = 0; i < circulos.length; i++) {
             if (circulos[i].getAttribute("data-x") == circulos[i].getAttribute("data-y")) {
                 contador = contador + 1;
@@ -200,47 +240,108 @@ Juego.marcar = function (event) {
         }
     }
 
-    if (contador == 3) {
+    if (contador >= Juego.niveles[Juego.nivelActual].ancho) {
         window.alert("ganado diagonal principal O");
+        Juego.reiniciar(equis, circulos);
+        puntajeO = puntajeO + 1;
+        Juego.generarPuntaje(nSection, true);
+
     }
     contador = 0;
 
     //VICTORIA O DIAGONAL OPUESTA
-    if (circulos.length >= 3) {
-        for (var i = 0; i < circulos.length; i++) {
-            if (circulos[i].getAttribute("data-x") == 0 && circulos[i].getAttribute("data-y") == 2) {
-                contador = contador + 1;
-            }
-        }
-        for (var i = 0; i < circulos.length; i++) {
-            if (circulos[i].getAttribute("data-x") == 1 && circulos[i].getAttribute("data-y") == 1) {
-                contador = contador + 1;
-            }
-        }
-        for (var i = 0; i < circulos.length; i++) {
-            if (circulos[i].getAttribute("data-x") == 2 && circulos[i].getAttribute("data-y") == 0) {
-                contador = contador + 1;
-            }
+    if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
+        for (var i=0;i<circulos.length;i++){
+            if((Juego.niveles[Juego.nivelActual].alto - circulos[i].getAttribute("data-x") - 1) == circulos[i].getAttribute("data-y")){
+               contador = contador + 1;
+               }
         }
     }
 
-    if (contador == 3) {
-        window.alert("ganado diagonal opuesta O")
+    if (contador >= Juego.niveles[Juego.nivelActual].ancho) {
+        window.alert("ganado diagonal opuesta O");
+        Juego.reiniciar(equis, circulos);
+        puntajeO = puntajeO + 1;
+        Juego.generarPuntaje(nSection, true);
+
     }
     contador = 0;
+
+    console.log(elementos);
+
+    //EMPATE
+
+    if (elementos == Juego.niveles[Juego.nivelActual].alto * Juego.niveles[Juego.nivelActual].ancho) {
+        
+        if(empate){    
+            window.setTimeout(Juego.reiniciar(equis, circulos), 1000);
+            window.alert("EMPATE");
+        }
+        elementos = 0;
+    }
 }
 
 
-Juego.generarPuntaje = function (contenedor) {
-    jugadorX = prompt("Ingresar nombre jugador X", "");
-    jugadorO = prompt("ingresar nombre jugador O");
+Juego.generarPuntaje = function (contenedor, bandera) {
     var parrafo = document.createElement("p"),
         parrafo2 = document.createElement("p"),
-        texto = document.createTextNode("Nombre JugadorO: " + jugadorO + " puntaje: " + puntajeO),
-        texto2 = document.createTextNode("Nombre JugadorX: " + jugadorX + " puntaje: " + puntajeX);
+        texto, texto2, texto3;
 
-    parrafo.appendChild(texto);
-    parrafo2.appendChild(texto2);
-    contenedor.appendChild(parrafo);
-    contenedor.appendChild(parrafo2);
+    if (!bandera) {
+        jugadorX = prompt("Ingresar nombre jugador X");
+        jugadorO = prompt("ingresar nombre jugador O");
+        texto = document.createTextNode("JugadorO: " + jugadorO + "     PUNTAJE: " + puntajeO),
+            texto2 = document.createTextNode("JugadorX: " + jugadorX + "     PUNTAJE: " + puntajeX)
+        parrafo.appendChild(texto);
+        parrafo2.appendChild(texto2);
+        contenedor.appendChild(parrafo);
+        contenedor.appendChild(parrafo2);
+    } else {
+
+        console.log(puntajeO);
+        var hijo = contenedor.getElementsByTagName("p"),
+            padre = hijo.item(0).parentNode;
+
+
+        padre.removeChild(hijo.item(0));
+        padre.removeChild(hijo.item(0));
+        texto3 = document.createTextNode("JugadorO: " + jugadorO + "     PUNTAJE: " + puntajeO),
+            texto2 = document.createTextNode("JugadorX: " + jugadorX + "     PUNTAJE: " + puntajeX)
+        parrafo.appendChild(texto3);
+        parrafo2.appendChild(texto2);
+        contenedor.appendChild(parrafo);
+        contenedor.appendChild(parrafo2);
+
+    }
+
+}
+
+
+
+Juego.reiniciar = function (equis, circulos) {
+    var hijo, padre;
+
+    
+        for (var i = 0; i < equis.length; i++) {
+            hijo = equis[i].getElementsByTagName("IMG");
+            padre = hijo.item(0).parentNode;
+            padre.removeChild(hijo.item(0));
+            equis[i].classList.remove("marcadaX");
+            equis[i].classList.add("sinmarcar");
+            equis[i].addEventListener("click", Juego.marcar);
+            
+        }
+
+        for (var i = 0; i < circulos.length; i++) {
+            hijo = circulos[i].getElementsByTagName("IMG");
+            padre = hijo.item(0).parentNode;
+            padre.removeChild(hijo.item(0));
+            circulos[i].classList.remove("marcadaO");
+            circulos[i].classList.add("sinmarcar");
+            circulos[i].addEventListener("click", Juego.marcar);
+
+        }
+    empate=false;
+    equis = [];
+    circulos = [];
 };
