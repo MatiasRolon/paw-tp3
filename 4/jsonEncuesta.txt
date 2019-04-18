@@ -8,11 +8,16 @@
 "respuestas": ["respuesta 2A", "respuesta 2B", "respuesta 2C", "respuesta 2D"],
 "correctas": [0, 1]},
 {"pregunta": "Pregunta 3",
-"respuestas": ["respuesta 3A", "respuesta 3B", "respuesta 3C", "respuesta 3D"],
-"correctas": [1, 2]},
+"respuestas": ["respuesta 3A", "respuesta 3B", "respuesta 3C"],
+"correctas": [1]},
 {"pregunta": "Pregunta 4",
+<<<<<<< Updated upstream
 "respuestas": ["respuesta 4A", "respuesta 4B", "respuesta 4C", "respuesta 4D"],
 "correctas": [1,3]}
+=======
+"respuestas": ["respuesta 4A", "respuesta 4B", "respuesta 4C"],
+"correctas": [1, 2]}
+>>>>>>> Stashed changes
 ],
 "cantidadAPreguntar": "3",
 "tiempoDeTrabajo": "xSegundos"

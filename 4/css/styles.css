@@ -22,7 +22,7 @@
     margin: 5px;
     padding: 10px;
     border-color: black;
-    background-color: cadetblue;
+    background-color: lightgrey;
 }
 
 .pregunta p{
@@ -34,6 +34,7 @@
     margin-right: 20px;
 }
 
+<<<<<<< Updated upstream:4/css/styles.css
 [type="checkbox"]{
 }
 
@@ -44,6 +45,14 @@
 
 .error {
     color: darkred;
+=======
+.acierto{
+    color: green;
+}
+
+.error{
+    color: red;
+>>>>>>> Stashed changes:4/style.css
 }
 
 .resultado{
