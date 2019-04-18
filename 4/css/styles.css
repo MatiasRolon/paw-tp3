@@ -17,11 +17,10 @@
 }
 
 .pregunta{
-    //width: 300px;
-    //height: 300px;
-    //display: block;
-    border: 5px;
-    margin: 3px;
+    width: auto;
+    display: block;
+    margin: 5px;
+    padding: 10px;
     border-color: black;
     background-color: cadetblue;
 }
@@ -31,15 +30,19 @@
 }
 
 .pregunta .respuesta{
-    /*display: block;*/
+    display: block;
     margin-right: 20px;
 }
 
-.acierto{
+[type="checkbox"]{
+}
+
+
+.acierto {
     color: darkgreen;
 }
 
-.error{
+.error {
     color: darkred;
 }
 

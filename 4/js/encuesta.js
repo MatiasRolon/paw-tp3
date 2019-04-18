@@ -3,26 +3,7 @@ var window = window || {},
   console = console || {},
   Juego = Juego || {};
 
-Juego.niveles = [
-  {
-    ancho: 8,
-    alto: 8,
-    minas: 10, 
-    nombre: "principiante"  
-  },
-  {
-    ancho: 16,
-    alto: 16,
-    minas:40     ,
-    nombre: "intermedio"
-  },
-  {
-    ancho: 16,
-    alto: 30,
-    minas:99,
-    nombre: "experto"
-  }
-];
+
 
 Juego.cargarJuego = function (botonHTML, contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function(){
@@ -37,11 +18,8 @@ Juego.cargarJuego = function (botonHTML, contenedorHTML) {
   });
 }
 
-/*  EJEMPLO INSERTAR ELEMENTO
-    var tSection = document.createElement("section");
-    tSection.classList.add("divsito");
-    Juego.contenedor.appendChild(tSection);*/
-    
+
+
 Juego.cargarBoton = function (){
     boton = document.createElement("button");    
     boton.classList.add("boton");
@@ -50,6 +28,7 @@ Juego.cargarBoton = function (){
     Juego.contenedor.appendChild(boton);
     
 }
+
 
 
 //si el id de esa preg (parametro) ya forma parte de las preguntas insertadas, no se la pondra de nuevo
@@ -67,14 +46,25 @@ Juego.preguntaInsertada = function(posiJson){
 }
 
 
+
 Juego.tildarDestildarRespuesta = function(){
     if (this.getAttribute("tildado")=="true"){
         this.setAttribute("tildado","false");
     }else{this.setAttribute("tildado","true"); }    
 }
 
-                                                    
+       
+Juego.mostrarReloj= function(){
+    momentoActual = new Date() 
+   	hora = momentoActual.getHours() 
+   	minuto = momentoActual.getMinutes() 
+   	segundo = momentoActual.getSeconds() 
+
+   	horaImprimible = hora + " : " + minuto + " : " + segundo;
+}
+
 Juego.cargarEncuesta = function (){
+    Juego.mostrarReloj(); 
     Juego.json = document.getElementById("jsonText").value;
     Juego.json = JSON.parse(Juego.json);
     
@@ -107,16 +97,13 @@ Juego.cargarEncuesta = function (){
                respuesta.classList.add("respuesta")
                respuesta.setAttribute("idJsonPreg",posiJson);
                respuesta.setAttribute("nroOpcion",j);
-               respuesta.setAttribute("tildado","false");
-               respuesta.addEventListener('click',Juego.tildarDestildarRespuesta);
                respuesta.innerHTML=Juego.json.preguntas[posiJson].respuestas[j];
                     var opcion = document.createElement("input");
                     opcion.setAttribute("type","checkbox");
+                    opcion.setAttribute("idJsonPreg",posiJson);//id de la pregunta a la que pertenece
                     opcion.setAttribute("nroOpcion",j);// posicion en el array de respuesta de esa preg
                     opcion.setAttribute("tildado","false");
                     opcion.addEventListener('click',Juego.tildarDestildarRespuesta);
-               
-                    opcion.setAttribute("idJsonPreg",posiJson);//id de la pregunta a la que pertenece
                //cargar en un atributo de la respuesta si ES O NO correctas
                 var e=0 
                 var salir = false;
@@ -132,10 +119,10 @@ Juego.cargarEncuesta = function (){
                         opcion.setAttribute("correcta","false");
                         respuesta.setAttribute("correcta","false");
                }
-               //FIN cargar cuales son correctas 
-               
-                respuesta.appendChild(opcion); //inserto input en el label
+               //FIN cargar cuales son correctas         
+               respuesta.appendChild(opcion); //inserto input en el label 
                 preg.appendChild(respuesta);//inserto label (es decir, respuesta) en el div PREGUNTA
+                             
            }//FIN insertar las posibles respuestas       
             
            Juego.contenedor.appendChild(preg);// insertar la PREGUNTA en el contenedor
@@ -144,14 +131,16 @@ Juego.cargarEncuesta = function (){
 }
 
 
+
 Juego.puntuarEncuesta = function (){
     
     Juego.maxPuntaje = document.querySelectorAll(".respuesta [correcta='true']").length;
     
-    var aciertos = document.querySelectorAll(".respuesta[correcta='true'][tildado='true']");
-    var errores = document.querySelectorAll(".respuesta[correcta='false'][tildado='true']");
+    var aciertos = document.querySelectorAll("[type='checkbox'][correcta='true'][tildado='true']");
+    var errores = document.querySelectorAll("[type='checkbox'][correcta='false'][tildado='true']");
     
     Juego.puntajeFinal= aciertos.length - errores.length;
+    if (Juego.puntajeFinal<0){ Juego.puntajeFinal=0;} // para que no tenga puntajes negativos.
     
     var resultados= document.createElement("div");
     resultados.classList.add("resultados");
@@ -167,19 +156,30 @@ Juego.puntuarEncuesta = function (){
     resultados.appendChild(maxpuntuacion);
     
     Juego.contenedor.appendChild(resultados);
-
-    for (var i1=0; i1<aciertos.length;i1++){
-        aciertos[i1].classList.add("acierto");        
-    }
     
-    for (var i2=0; i2<errores.length;i2++){
-        errores[i2].classList.add("error");        
-    }         
+    Juego.marcarResultados(aciertos,errores);
     
 }
 
 
 
+Juego.marcarResultados = function (aciertos,errores){
+    for (var i1=0; i1<aciertos.length;i1++){
+        aciertos[i1].classList.add("acierto");   
+        var nroopcion1 = aciertos[i1].getAttribute("nroopcion");
+        var idjsonPreg1 = aciertos[i1].getAttribute("idjsonpreg");
+        var labelAcierto = document.querySelector(".respuesta[idjsonpreg='"+idjsonPreg1+"'][nroopcion='"+nroopcion1+"']");
+        labelAcierto.classList.add("acierto");
+    }
+    
+    for (var i2=0; i2<errores.length;i2++){
+        errores[i2].classList.add("error");    
+        var nroopcion2 = errores[i2].getAttribute("nroopcion");
+        var idjsonpreg2 = errores[i2].getAttribute("idjsonpreg");
+        var labelError = document.querySelector(".respuesta[idjsonpreg='"+idjsonpreg2+"'][nroopcion='"+nroopcion2+"']");
+        labelError.classList.add("error");       
+    }      
+}
 
 
 

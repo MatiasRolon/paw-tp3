@@ -12,8 +12,8 @@
 "correctas": [1, 2]},
 {"pregunta": "Pregunta 4",
 "respuestas": ["respuesta 4A", "respuesta 4B", "respuesta 4C", "respuesta 4D"],
-"correctas": [1, 4]}
+"correctas": [1,3]}
 ],
-"cantidadAPreguntar": "2",
+"cantidadAPreguntar": "3",
 "tiempoDeTrabajo": "xSegundos"
 }
