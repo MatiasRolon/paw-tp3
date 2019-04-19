@@ -1,8 +1,11 @@
-### Consideraciones
+## Consideraciones
+<ul>
+ <li> El puntaje es contemplado a partir del total de respuestas correctas que tenga el test. Una vez sabido esto, las respuestas tildadas que sean correctas sumaran puntos, las tildadas incorrectas restaran, y las no tildadas que sean correctas no afectaran el puntaje. Ejemplo: Si en total hay 20 respuestas correctas posibles (sera el maximo puntaje a lograr), el usuario tilda en 15 que son correctas y en 7 que no son correctas conseguira un total de 8 puntos sobre 20. </li>
+ <li> Una vez mostrados los resultados no tendran mas efecto tanto la cuenta regresvia como el boton "Puntutar" sobre el puntaje del test, para no tener resultados ambiguos o nuevas oportunidades de realizarlo un mismo usuario. Para reiniciar la encuesta se tendra que volver a la pantalla principal o bien actualizar la pagina.</li>
+ </ul>
  
- 
-## Ejemplos de Test 
-<p> Para facilitar el testing del ejercicio de realizaron 2 ejemplos para que el usuario pueda copiarlos y pegarlo en la pantalla principal de carga segun el que desee en cada momento</p>
+### Ejemplos de Test 
+<p> Para facilitar el testing del ejercicio de realizaron 2 ejemplos para que el usuario pueda copiarlos y pegarlo en la pantalla principal de carga segun el que desee en cada momento, ahorrandole tiempo.</p>
 
 -------EJEMPLO 1 : FUTBOL ------------------------------------------------------
 <p>{
