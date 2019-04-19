@@ -33,8 +33,12 @@ Trabajo Practico N°3 de Programacion en Ambiente Web - UNLu
 <p> RESPUESTA </p>
 <br>
 <p><b>7) ¿Qué es el view port? ¿Cómo se configura? ¿qué problema soluciona?</b></p>
-<p> RESPUESTA </p>
+<p> Es una ventana grafica que representa la parte visible del contenido en la pantalla del navegador. Es un tamaño teórico que tiene la pantalla ya que no tiene que coincidir necesariamente con su resolución real (pixeles en pantalla).</p>
+<p> Se puede configurar en el HEAD del HTML de nuestra pagina, con la etiqueta META como en el siguiente ejemplo en donde se establece ancho y escala:</p>
+<p>"<meta name="viewport" content="width=device-width, initial-scale=1.0">"</p>
+<p>Es una forma de aplicar un diseño responsivo a la pagina y resolver el problema de sitios no optimizados para móviles ya que la resolucion en los diferentes tipos de dispositivos nunca es homogenea, logrando que se vean mejor definiendo el ancho, alto y escala del área usada por el navegador para mostrar contenido y no agregarle doble trabajo al usuario a la hora de navegar por el sitio.</p>
 <br>
+
 <p><b>8) ¿Qué son las media querys? Enumere los distintos tipos de medios y las principales
 características de cada uno de ellos.</b></p>
 <p> RESPUESTA </p>
