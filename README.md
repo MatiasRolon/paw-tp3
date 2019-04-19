@@ -27,7 +27,7 @@ Trabajo Practico N°3 de Programacion en Ambiente Web - UNLu
 <p> <cite> body{  font-family: "Mystery Quest";   } </cite></p> 
 <br>
 <p><b>5) ¿Qué son y para qué sirven los pseudoElementos?</b></p>
-<p> RESPUESTA </p>
+<p> Son caracteristicas adicionales de los selectores con una sintaxis especial que se usan para poder aplicar estilos a algunos elementos particulares, con caracteristicas que no captan los selectores comunes. Referencian partes mas concretas de un elemento  seleccionado siguiendo un patron como "Lo que viene despues de", o "la primera linea de". </p>
 <br>
 <p><b>6) ¿Cómo se calcula la prioridad de una regla CSS? Expresarlo como una fórmula matemática.</b></p>
 <p> RESPUESTA </p>
