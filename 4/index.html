@@ -5,15 +5,18 @@
     <title>TP 3 - Javascript y CSS</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/encuesta.js"></script>
-    <script>Juego.cargarJuego("botonEncuesta","encuesta");</script>
+    <script>Juego.cargarJuego("botonEncuesta","encuesta","carga");</script>
     
 </head>
 <body>
     <main>
-        <p> Ingrese aqui su encuesta en formato Json:</p>
-        <textarea id="jsonText" class="jsonText"></textarea>
-        <button id="botonEncuesta" class="boton"> EMPEZAR ENCUESTA </button>
+       <section id="carga">
+            <p> Ingrese aqui su encuesta en formato Json:</p>
+            <textarea id="jsonText" class="jsonText"></textarea>
+            <button id="botonEncuesta" class="boton"> CARGAR ENCUESTA </button>
+        </section>
         <div id="encuesta"> </div>
+        
     </main>
 </body>
 </html>

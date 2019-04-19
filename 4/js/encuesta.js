@@ -5,27 +5,46 @@ var window = window || {},
 
 
 
-Juego.cargarJuego = function (botonHTML, contenedorHTML) {
+Juego.cargarJuego = function (botonHTML, contenedorHTML,seccionInicialHTML) {
   window.addEventListener("DOMContentLoaded", function(){
     var boton=0;
     if (typeof botonHTML === "string") {
         boton = document.getElementById(botonHTML);    
         boton.addEventListener("click",Juego.cargarEncuesta);
-        boton.addEventListener("click",Juego.cargarBoton);
+        boton.addEventListener("click",Juego.cargarBotones);
         Juego.contenedor = document.getElementById(contenedorHTML);
+        Juego.seccionInicial = document.getElementById(seccionInicialHTML);
     }  
       
   });
 }
 
 
+Juego.VolverAEmpezar= function(){
+    
+    Juego.contenedor.classList.add("invisible");
+    while(Juego.contenedor.hasChildNodes()){
+	   Juego.contenedor.removeChild(Juego.contenedor.firstChild);
+    }
+    Juego.seccionInicial.classList.remove("invisible");
+    Juego.estado = "empezado";
+    window.clearInterval(Juego.intervalo);
+}
 
-Juego.cargarBoton = function (){
-    boton = document.createElement("button");    
+
+Juego.cargarBotones = function (){
+    var boton = document.createElement("button");    
     boton.classList.add("boton");
     boton.innerHTML="PUNTUAR";
     boton.addEventListener("click",Juego.puntuarEncuesta);
     Juego.contenedor.appendChild(boton);
+    
+    var boton2 = document.createElement("button");    
+    boton2.classList.add("boton");
+    boton2.innerHTML="VOLVER";
+    boton2.addEventListener("click",Juego.VolverAEmpezar);
+    Juego.contenedor.appendChild(boton2);
+    
     
 }
 
@@ -53,20 +72,67 @@ Juego.tildarDestildarRespuesta = function(){
     }else{this.setAttribute("tildado","true"); }    
 }
 
-       
-Juego.mostrarReloj= function(){
-    momentoActual = new Date() 
-   	hora = momentoActual.getHours() 
-   	minuto = momentoActual.getMinutes() 
-   	segundo = momentoActual.getSeconds() 
 
-   	horaImprimible = hora + " : " + minuto + " : " + segundo;
+       
+Juego.mostrarReloj= function(contenedorReloj){
+    Juego.tiempo = document.createElement("div");
+    Juego.tiempo.classList.add("tiempo");
+    //Juego.tiempo.setAttribute("Termino","false");
+    contenedorReloj.appendChild(Juego.tiempo);
+        var minutos = parseInt(Juego.json.tiempoDeTrabajo/60);
+        var segundos = Juego.json.tiempoDeTrabajo%60;
+    
+        Juego.tiempo.innerHTML = minutos + ":" + (segundos < 10 ? "0" + segundos : segundos);
+        Juego.intervalo = window.setInterval( function(){
+            Juego.tiempoRestanteCompletado= minutos + ":" + (segundos < 10 ? "0" + segundos : segundos);
+            
+            if (--segundos < 0){
+                segundos = 59;
+                minutos--;
+            }
+
+            if (!minutos && !segundos){
+                window.clearInterval(Juego.intervalo);
+            }
+            
+            Juego.tiempo.innerHTML = minutos + ":" + (segundos < 10 ? "0" + segundos : segundos);
+        }, 1000);
+    
+    
+    var miliseg = Juego.json.tiempoDeTrabajo*1000;
+    window.setTimeout("Juego.puntuarEncuesta()",miliseg);
+    
 }
 
+
+
+Juego.mostrarDatos = function(contenedorDatos){
+    Juego.info = document.createElement("div");
+    Juego.info.classList.add("info");
+    contenedorDatos.appendChild(Juego.info);
+    
+    Juego.info.innerHTML = Juego.json.titulo;
+}
+
+
 Juego.cargarEncuesta = function (){
-    Juego.mostrarReloj(); 
+    
+    if (Juego.contenedor.classList.contains("invisible")){
+        Juego.contenedor.classList.remove("invisible");
+    }// fin del IF (es INVISIBLE) 
+    
     Juego.json = document.getElementById("jsonText").value;
     Juego.json = JSON.parse(Juego.json);
+    
+    Juego.seccionInicial.classList.add("invisible");
+    
+    //creo el div donde ira la informacion principal (en este caso titulo del test y el cronometro) 
+    Juego.datos = document.createElement("div");
+    Juego.datos.classList.add("datos");
+    Juego.contenedor.appendChild(Juego.datos);
+    
+    Juego.mostrarDatos(Juego.datos);
+    Juego.mostrarReloj(Juego.datos);
     
     //Juego.x =(Juego.json.preguntas[2].respuestas[1]);
     Juego.cantPreguntas = Juego.json.cantidadAPreguntar;
@@ -86,7 +152,7 @@ Juego.cargarEncuesta = function (){
            preg.setAttribute("nroPreg",i);//numero de pregunta en la encuesta del usuario
            preg.setAttribute("idJson",posiJson);//numero de pregunta segun posicion en el json
                 var pregtexto = document.createElement("p"); // inserto el texto de la pregunta
-                pregtexto.innerHTML = Juego.json.preguntas[posiJson].pregunta;
+                pregtexto.innerHTML = i+". "+Juego.json.preguntas[posiJson].pregunta;
                 preg.appendChild(pregtexto);
            Juego.preguntasInsertadas.push(posiJson);
             
@@ -128,14 +194,21 @@ Juego.cargarEncuesta = function (){
            Juego.contenedor.appendChild(preg);// insertar la PREGUNTA en el contenedor
         }// fin IF insertar preguntas si no estan anteriormente    
     }//fin while insertar preguntas
+   
 }
 
 
 
 Juego.puntuarEncuesta = function (){
+        
+  if(Juego.estado != "terminado"){  
+      //No se podra volver a puntuar, solo se hara una vez por juego, por quien se haya dado primero, ya sea por FIN del //cronometro o bien por que el usuario termino la encuesta
+    Juego.estado = "terminado";
+    window.clearInterval(Juego.intervalo);
     
+      //cantidad total de respuestas a acertar.
     Juego.maxPuntaje = document.querySelectorAll(".respuesta [correcta='true']").length;
-    
+    //-----------------------------------------
     var aciertos = document.querySelectorAll("[type='checkbox'][correcta='true'][tildado='true']");
     var errores = document.querySelectorAll("[type='checkbox'][correcta='false'][tildado='true']");
     
@@ -152,13 +225,19 @@ Juego.puntuarEncuesta = function (){
     
     var maxpuntuacion = document.createElement("label");
     maxpuntuacion.classList.add("resultado");
-    maxpuntuacion.innerHTML="Maximos aciertos posibles: "+Juego.maxPuntaje;
+    maxpuntuacion.innerHTML="De: "+Juego.maxPuntaje;
     resultados.appendChild(maxpuntuacion);
     
+    var tiempoCompletado = document.createElement("label");
+    tiempoCompletado.classList.add("resultado");
+    tiempoCompletado.innerHTML="Tiempo restante: "+Juego.tiempoRestanteCompletado;
+    resultados.appendChild(tiempoCompletado);
+
+      
     Juego.contenedor.appendChild(resultados);
     
     Juego.marcarResultados(aciertos,errores);
-    
+  }
 }
 
 

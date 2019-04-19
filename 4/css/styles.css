@@ -1,19 +1,61 @@
+body{
+    	font-family: 'Rubik One', sans-serif;
+}
+
 .boton{ 
-	display: block; 
+	display: inline-block; 
 	padding: 10px 10px;
 	color: white;
 	vertical-align: middle;
-	font-family: 'Rubik One', sans-serif;
 	text-decoration: none;
 	font-size: 15px;
 	transition: all .5s;
 	background-color: #3498db;
+    margin: 5px;
 }
+
+#carga{
+ position:absolute;
+    left:38%;
+    top:0%    
+}
+#carga .boton{
+    position: absolute;
+    left: 22%;
+}
+
 
 .jsonText{
     width: 300px;
     height: 300px;
     text-align: top;
+}
+
+.datos{
+	display: block; 
+    height: 400;
+	padding: 10px;
+	color: white;
+    margin: 5px;
+	vertical-align: middle;
+	font-size: 30px;
+	transition: all .5s;
+	background-color: #4498db;   
+}
+
+
+.info{
+     display: inline-block;
+    width: 80%;
+}
+
+
+.tiempo{
+    display: inline-block;
+    background-color: darkblue;
+    width: 20%;
+    height: 95%;
+    text-align: right;
 }
 
 .pregunta{
@@ -34,29 +76,44 @@
     margin-right: 20px;
 }
 
-<<<<<<< Updated upstream:4/css/styles.css
+
 [type="checkbox"]{
+    
 }
 
-
-.acierto {
-    color: darkgreen;
-}
-
-.error {
-    color: darkred;
-=======
 .acierto{
     color: green;
 }
 
 .error{
     color: red;
->>>>>>> Stashed changes:4/style.css
+}
+
+.resultados{
+    display: block;
+    
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid #bbb;
+    border-color: black;
+    
+    width: 300px;
+    height: 200px;
+    
+    background-color: pink;
+    
+    position:absolute;
+    left:35%;
+    top:40%
 }
 
 .resultado{
     margin-top: 20px;
     font-size: 30px;
     display: block;
+    position:relative;
+}
+
+.invisible{
+    display: none;
 }
