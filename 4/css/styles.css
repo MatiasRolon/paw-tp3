@@ -67,6 +67,7 @@ body{
     background-color: lightgrey;
 }
 
+
 .pregunta p{
     font-weight: bold;
 }
@@ -94,15 +95,16 @@ body{
     
     margin: 5px;
     padding: 10px;
-    border: 2px solid #bbb;
-    border-color: black;
+    border: 5px solid #bbb;
+    border-color: darkblue;
     
     width: 300px;
     height: 200px;
     
-    background-color: pink;
+    color: aliceblue;
+    background-color: #4498db;
     
-    position:absolute;
+    position:fixed;
     left:35%;
     top:40%
 }

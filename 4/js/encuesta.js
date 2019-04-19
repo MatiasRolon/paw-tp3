@@ -190,7 +190,6 @@ Juego.cargarEncuesta = function (){
                 preg.appendChild(respuesta);//inserto label (es decir, respuesta) en el div PREGUNTA
                              
            }//FIN insertar las posibles respuestas       
-            
            Juego.contenedor.appendChild(preg);// insertar la PREGUNTA en el contenedor
         }// fin IF insertar preguntas si no estan anteriormente    
     }//fin while insertar preguntas
