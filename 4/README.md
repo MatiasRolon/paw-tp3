@@ -1,7 +1,7 @@
-###Consideraciones
+### Consideraciones
  
  
-##Ejemplos de Test 
+## Ejemplos de Test 
 <p> Para facilitar el testing del ejercicio de realizaron 2 ejemplos para que el usuario pueda copiarlos y pegarlo en la pantalla principal de carga segun el que desee en cada momento</p>
 
 -------EJEMPLO 1 : FUTBOL ------------------------------------------------------
