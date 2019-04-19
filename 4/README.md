@@ -5,7 +5,7 @@
 <p> Para facilitar el testing del ejercicio de realizaron 2 ejemplos para que el usuario pueda copiarlos y pegarlo en la pantalla principal de carga segun el que desee en cada momento</p>
 
 -------EJEMPLO 1 : FUTBOL ------------------------------------------------------
-{
+<p>{
 "titulo": "Futbol",
 "preguntas": [{
 "pregunta": "¿Cual de estos Jugadores ha jugado en la Juventus?",
@@ -40,11 +40,11 @@
 ],
 "cantidadAPreguntar": "4",
 "tiempoDeTrabajo": "117"
-}
+}</p>
 
 
 -------EJEMPLO 2 : JUEGO DE TRONOS ------------------------------------------------------
-{
+<p>{
 "titulo": "Game of Thrones",
 "preguntas": [{
 "pregunta": "¿Cual de estos son libros publicados por George R.R. Martin?",
@@ -80,3 +80,4 @@
 "cantidadAPreguntar": "4",
 "tiempoDeTrabajo": "120"
 }
+</p>
