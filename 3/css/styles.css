@@ -1,0 +1,21 @@
+@import url(reset.css);
+
+.botonera{
+    display: inline-block;
+    width:50vw;
+}
+
+.botonera .boton {
+margin:20px;
+  text-shadow: 1px 1px 3px #666666;
+  font-family: Arial;
+  font-size: 30px;
+  padding: 18px;
+  background: #bababa;
+  text-decoration: none;
+}
+
+.botonera .boton:hover {
+  background: #92999e;
+  text-decoration: none;
+}
