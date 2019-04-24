@@ -55,7 +55,7 @@ Pagina.cargarAdministracionVideos = function(contenedorHTML){
 
          //agrego los atributos del video en reproduccion, ya que siempre seran las mismas y habra uno solo
         Pagina.videoActual = document.createElement("video"); 
-        Pagina.videoActual.setAttribute("width","70%");
+        Pagina.videoActual.setAttribute("width","95%");
         Pagina.videoActual.setAttribute("idvideo",null);
         Pagina.videoActual.setAttribute("controls","true");
          //source.setAttribute("type","video/mp4")
@@ -79,7 +79,7 @@ Pagina.agregarVideo = function(){
     
     //añado la miniatura que se vera (es el video en si, pero sin propiedades para reproducirlo)
     var miniatura = document.createElement("video");
-    miniatura.setAttribute("width","200px");
+    //miniatura.setAttribute("width","40%");
     miniatura.setAttribute("idVideo",Pagina.cantVideos);
     
     //Agrego evento que selecciona el video en Reproduccion.
@@ -106,7 +106,8 @@ Pagina.agregarVideo = function(){
     //creo el boton para sacarlo de la lista de reproduccion cuando el usuario desee
     var botonEliminar = document.createElement("button");
     botonEliminar.classList.add("boton");
-    botonEliminar.innerHTML = "QUITAR";
+    botonEliminar.classList.add("quitar");
+    botonEliminar.innerHTML = "X";
     botonEliminar.addEventListener("click",function(){
                                                 if (Pagina.videoActual.getAttribute("idvideo")==miniatura.getAttribute("idvideo")){
                                                     Pagina.videoActual.setAttribute("src","");
