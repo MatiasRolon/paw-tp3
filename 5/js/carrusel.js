@@ -111,7 +111,9 @@ Pagina.actualizarImgCargadas = function(){
         visibles.forEach(function(e){
                             e.classList.remove("no-visible");
                         }
-        )
+        );
+        var liPre = document.querySelector(".listaImagenes");
+        liPre.removeChild(liPre.firstChild);//elimino el primer item (pre carga)
     }
 }
 
