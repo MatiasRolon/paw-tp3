@@ -2,31 +2,53 @@
 .no-visible{
     display: none;
 }
-/*---------SECCIONES------*/
+/*----------SECCIONES-------*/
+body{
+    
+}
+
 #contenedor{
     height: 100%;
     width: 100%;
-    margin-right: 0px;
 }
 
         .carrusel{
-            position: absolute;
+            position: relative;
             display: inline-block;
             height: 100%;
             width: 100%;
+            margin: 0%;
         }
 
+                .listaImagenes{
+                    list-style: none;
+                    padding: 0px;
+                    margin: 0px;
+                }
                 .thumbs{
                     display:flex;
-                    width: 20%;
+                    position: relative;
+                    left: 45%;
                 }
 /*------------------------*/
-
-.listaImagenes{
-    list-style: none;
-    padding: 0px;
+.texto.pre-carga{
+    display: block;
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+    font-size: 30px;
+    font-family: monospace;
 }
-
+.progreso-carga{
+    border-bottom: solid 3px;
+    border-left: solid 3px;
+    border-top: solid 3px;
+    display: block;
+    height: 30px;
+    border-radius: 12px;
+    background-color: chartreuse;
+    transition: all 1s linear 0s;
+}
 
 .li-imagen{
     display: block;
@@ -58,7 +80,7 @@
 }
 
 
-/*---------BOTONES----------*/
+/*-----------BOTONES-----------*/
 .boton{
     width: 50px;
     height: 50px;
@@ -67,8 +89,9 @@
     background: white;
     font-size: 30px;
     border-style: none;
-    top: 50%;
     z-index: 3;
+    margin-top: 25%;
+    opacity: 0.5;
 }
 
 .boton.haciaDelante{
@@ -83,6 +106,7 @@
 .boton:hover{
     background-color: dimgrey;
     color: white;
+    opacity: 1;
 }
 
 .thumb{
@@ -93,10 +117,12 @@
     padding: 0px;
     margin: 5px;
     z-index: 3;
+    opacity: 0.5;
 }
 
 .thumb:hover{
-    background-color: indianred;
+    background-color: white;
+    opacity: 1;
     
 }
 
@@ -104,7 +130,7 @@
     background-color: darkred;
 }
 
-/*--------------------------*/
+/*-----------------------------*/
 /*-------ANIMACIONES----------*/
 .AnimacionIzq {
   animation: slideIzq 1 1s ease;    

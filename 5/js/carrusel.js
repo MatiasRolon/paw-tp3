@@ -69,9 +69,13 @@ Pagina.cargarImagenes= function(){
     var ulInsert= document.createElement("ul");
     ulInsert.classList.add("listaImagenes");
     
-    var preCarga = document.createElement("li");
-    preCarga.classList.add("li-imagen");
+    var preCarga = document.createElement("div");
+    preCarga.classList.add("texto");
     preCarga.classList.add("pre-carga");
+    var barra = document.createElement("div");
+    barra.classList.add("progreso-carga");
+    barra.classList.add("pre-carga");
+    ulInsert.appendChild(barra);
     ulInsert.appendChild(preCarga);
     
     images.forEach(function(path){
@@ -98,13 +102,18 @@ Pagina.cargarImagenes= function(){
 }
 
 
+Pagina.progresoBarra = function(porcen) {
+    var barra = document.querySelector(".progreso-carga"); 
+    barra.style.width = porcen + '%'; 
+}
+
 Pagina.actualizarImgCargadas = function(){
     imgCargadas++;
-    var preCarga = document.querySelector(".li-imagen.pre-carga");
+    var preCarga = document.querySelector(".texto.pre-carga");
     var porcen = (imgCargadas*100/images.length).toFixed(1); 
-    preCarga.innerHTML = "CARGANDO IMAGENES: "+porcen+"%"; /*("+imgCargadas +"/"+ images.length+")";*/
+    preCarga.innerHTML = "CARGANDO "+porcen+"%"; /*("+imgCargadas +"/"+ images.length+")";*/
     console.log("imagenes cargadas> "+ imgCargadas);
-    
+    Pagina.progresoBarra(porcen);
     //Si ya se cargaron todas, vuelvo visibles todos los elementos que no tenian que estarlo durante la carga.
     if (imgCargadas==images.length){
         var visibles = document.querySelectorAll(".no-visible");
@@ -112,8 +121,10 @@ Pagina.actualizarImgCargadas = function(){
                             e.classList.remove("no-visible");
                         }
         );
-        var liPre = document.querySelector(".listaImagenes");
-        liPre.removeChild(liPre.firstChild);//elimino el primer item (pre carga)
+        //elimina los elementos usados mientras cargaban las imagenes
+       document.querySelectorAll(".pre-carga").forEach(function(e){ 
+                                                        e.parentNode.removeChild(e)
+                                                    });
     }
 }
 
