@@ -3,7 +3,8 @@ var Juego = Juego || {},
     console = console || {},
     window = window || {},
     turno = 1,
-    jugadorX, contador, jugadorO, puntajeX, puntajeO, nSection, elementos = 0,
+    jugadorX, contador, jugadorO, puntajeX, puntajeO, nSection, tSection, elementos = 0,
+    c = 0,
     empate = true,
     ganada = false,
     bandera = false,
@@ -16,13 +17,7 @@ puntajeX = 0;
 puntajeO = 0;
 contador = 0;
 
-while (!bandera) {
-    aux = prompt("INGRESAR NIVEL 0|1|2|3");
-    if (aux == 1 || aux == 2 || aux == 3 || aux == 0) {
-        Juego.nivelActual = aux;
-        bandera = true;
-    }
-}
+Juego.nivelActual = 0;
 
 
 Juego.Armar = function (contenedor) {
@@ -35,22 +30,112 @@ Juego.Armar = function (contenedor) {
         if (typeof Juego.contenedor === "string") {
             Juego.contenedor = document.getElementById(Juego.contenedor);
         }
-        var tSection = document.createElement("section");
+        var
+            cuadro, bSection = document.createElement("section");
 
+        tSection = document.createElement("section");
         nSection = document.createElement("section");
-
+        bSection.classList.add("niveles");
         tSection.classList.add("taTeTi" + Juego.nivelActual);
         nSection.classList.add("puntaje");
         console.log(tSection);
+        Juego.contenedor.appendChild(bSection);
         Juego.contenedor.appendChild(tSection);
         Juego.contenedor.appendChild(nSection);
-        tSection.classList.add("jugadores")
+        tSection.classList.add("jugadores");
+        cuadro = document.createElement("div");
+        cuadro.classList.add("cuadro");
+        cuadro.classList.add("reiniciar");
+        nSection.appendChild(cuadro);
+        Juego.botonesNiveles(bSection);
         Juego.generarTablero(tSection);
         Juego.generarPuntaje(nSection, false);
+
+
 
     }
 
     window.addEventListener("DOMContentLoaded", inicio);
+
+}
+
+Juego.botonesNiveles = function (contenedor) {
+    var btn0, btn1, btn2, btn3;
+
+    btn0 = document.createElement("div");
+    btn0.classList.add("botonN");
+    btn0.addEventListener("click", Juego.nivel0);
+    contenedor.appendChild(btn0);
+
+    btn1 = document.createElement("div");
+    btn1.classList.add("botonN");
+    btn1.addEventListener("click", Juego.nivel1);
+    contenedor.appendChild(btn1);
+
+    btn2 = document.createElement("div");
+    btn2.classList.add("botonN");
+    btn2.addEventListener("click", Juego.nivel2);
+    contenedor.appendChild(btn2);
+
+    btn3 = document.createElement("div");
+    btn3.classList.add("botonN");
+    btn3.addEventListener("click", Juego.nivel3);
+    contenedor.appendChild(btn3);
+}
+
+Juego.nivel0 = function (event) {
+
+    tSection.classList.remove("taTeTi" + Juego.nivelActual);
+    Juego.borrarTablero(tSection);
+    Juego.nivelActual = 0;
+    tSection.classList.add("taTeTi" + Juego.nivelActual);
+
+    Juego.generarTablero(tSection);
+
+}
+
+Juego.nivel1 = function (event) {
+
+    tSection.classList.remove("taTeTi" + Juego.nivelActual);
+    Juego.borrarTablero(tSection);
+    Juego.nivelActual = 1;
+    tSection.classList.add("taTeTi" + Juego.nivelActual);
+
+    Juego.generarTablero(tSection);
+
+}
+
+Juego.nivel2 = function (event) {
+
+    tSection.classList.remove("taTeTi" + Juego.nivelActual);
+    Juego.borrarTablero(tSection);
+    Juego.nivelActual = 2;
+    tSection.classList.add("taTeTi" + Juego.nivelActual);
+
+    Juego.generarTablero(tSection);
+
+}
+
+Juego.nivel3 = function (event) {
+
+    tSection.classList.remove("taTeTi" + Juego.nivelActual);
+    Juego.borrarTablero(tSection);
+    Juego.nivelActual = 3;
+    tSection.classList.add("taTeTi" + Juego.nivelActual);
+
+    Juego.generarTablero(tSection);
+
+}
+
+Juego.borrarTablero = function (contenedor) {
+    var ancho = Juego.niveles[Juego.nivelActual].ancho,
+        alto = Juego.niveles[Juego.nivelActual].alto;
+
+    for (var i = 0; i < ancho * alto; i++) {
+
+        contenedor.removeChild(contenedor.firstChild);
+
+    }
 
 }
 
@@ -67,8 +152,10 @@ Juego.generarTablero = function (contenedor) {
             cuadro.setAttribute("data-x", i);
             cuadro.setAttribute("data-y", j);
             cuadro.addEventListener("click", Juego.marcar);
+
             contenedor.appendChild(cuadro);
         }
+
     }
 
 }
@@ -77,11 +164,20 @@ Juego.marcar = function (event) {
     var cuadro = event.target,
         imagenO, imagenX,
         equis = document.querySelectorAll("div.cuadro.marcadaX"),
-        circulos = document.querySelectorAll("div.cuadro.marcadaO");
-       
+        circulos = document.querySelectorAll("div.cuadro.marcadaO"),
+        cuadros = document.querySelectorAll("div.cuadro"),
+        botones = document.querySelectorAll("div.botonN"),
+        ganadora;
 
+
+    botones[0].removeEventListener("click", Juego.nivel0);
+    botones[1].removeEventListener("click", Juego.nivel1);
+    botones[2].removeEventListener("click", Juego.nivel2);
+    botones[3].removeEventListener("click", Juego.nivel3);
+
+    console.log(cuadros);
     cuadro.classList.remove("sinmarcar");
-
+    c = c + 1;
     if (turno % 2 == 0) {
         imagenO = document.createElement("img");
         imagenO.setAttribute("src", "images/O.jpg");
@@ -103,66 +199,76 @@ Juego.marcar = function (event) {
         equis = document.querySelectorAll("div.cuadro.marcadaX");
         elementos = elementos + 1;
     }
-    
+
     console.log(ganada);
-    contador=0;
+    contador = 0;
+
     //VICTORIA X POR HORIZONTAL
-   
+
     if (equis.length >= Juego.niveles[Juego.nivelActual].alto) {
         var i = 0;
-        
-        while ((i < equis.length ) && (!ganada)) {
-            for (var j = 0 ; j < equis.length; j++) {
+
+        while ((i < equis.length) && (!ganada)) {
+            for (var j = 0; j < equis.length; j++) {
                 if (equis[i].getAttribute("data-x") == equis[j].getAttribute("data-x")) {
                     contador = contador + 1;
+                    equis[i].classList.add("gana");
+                    equis[j].classList.add("gana");
                 }
 
             }
-           // console.log("valor contador x horizontal "+contador);
-            if (contador == Juego.niveles[Juego.nivelActual].alto){
+
+
+            if (contador == Juego.niveles[Juego.nivelActual].alto) {
                 ganada = true;
-                empate=false;
+                empate = false;
             }
+
+            console.log(ganadora);
             i = i + 1;
             contador = 0;
-            
+
         }
 
 
     }
-    
+
     if (ganada) {
-        
+
+
         window.alert("ganado horizontal X");
         Juego.reiniciar(equis, circulos);
         puntajeX = puntajeX + 1;
         Juego.generarPuntaje(nSection, true);
 
     }
-   
+
 
     //VICTORIA X POR VERTICAL
 
     if (equis.length >= Juego.niveles[Juego.nivelActual].alto) {
         var i = 0;
-        while ((i < equis.length ) && (!ganada)) {
+        while ((i < equis.length) && (!ganada)) {
             for (var j = 0; j < equis.length; j++) {
                 if (equis[i].getAttribute("data-y") == equis[j].getAttribute("data-y")) {
                     contador = contador + 1;
                 }
-                
+
 
             }
-            if (contador == Juego.niveles[Juego.nivelActual].alto){
+
+
+            if (contador == Juego.niveles[Juego.nivelActual].alto) {
                 ganada = true;
-                empate=false;
+                empate = false;
             }
+
             i = i + 1;
             contador = 0;
         }
     }
-    
-    
+
+
     if (ganada) {
         window.alert("ganado vertical X");
         Juego.reiniciar(equis, circulos);
@@ -176,22 +282,25 @@ Juego.marcar = function (event) {
     //VICTORIA X DIAGONAL PRINCIPAL
 
     if (equis.length >= Juego.niveles[Juego.nivelActual].alto) {
-        var i=0;
-        while ((i < equis.length) && (!ganada) ) {
-            
+        var i = 0;
+        while ((i < equis.length) && (!ganada)) {
+
             if (equis[i].getAttribute("data-x") == equis[i].getAttribute("data-y")) {
 
                 contador = contador + 1;
+                equis[i].classList.add("gana");
+            }
 
-            }
-            if (contador == Juego.niveles[Juego.nivelActual].alto){
+            ganadora = document.querySelectorAll("div.cuadro.gana");
+
+            if (contador == Juego.niveles[Juego.nivelActual].alto) {
                 ganada = true;
-                empate=false;
+                empate = false;
             }
-            
-            i=i + 1;
+
+            i = i + 1;
         }
-        contador=0;
+        contador = 0;
     }
 
     if (ganada) {
@@ -209,18 +318,20 @@ Juego.marcar = function (event) {
         var i = 0;
         while (i < equis.length && (!ganada)) {
             if ((Juego.niveles[Juego.nivelActual].alto - equis[i].getAttribute("data-x") - 1) == equis[i].getAttribute("data-y")) {
-                
+
                 contador = contador + 1;
             }
-            
-            if (contador == Juego.niveles[Juego.nivelActual].alto){
+
+
+
+            if (contador == Juego.niveles[Juego.nivelActual].alto) {
                 ganada = true;
-                empate=false;
+                empate = false;
             }
-            
-            i=i + 1;
+
+            i = i + 1;
         }
-        contador=0;
+        contador = 0;
     }
 
     if (ganada) {
@@ -233,23 +344,24 @@ Juego.marcar = function (event) {
     contador = 0;
 
     //VICTORIA 0 POR HORIZONTAL
-  
+
     if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
         var i = 0;
         while ((i < circulos.length) && (!ganada)) {
             for (var j = 0; j < circulos.length; j++) {
                 if (circulos[i].getAttribute("data-x") == circulos[j].getAttribute("data-x")) {
-                    
                     contador = contador + 1;
+                    // ganadora = document.querySelectorAll("div.cuadro.gana");
                 }
 
             }
-            
-            if (contador == Juego.niveles[Juego.nivelActual].alto){
-                ganada=true;
-                empate=false;
+
+
+            if (contador == Juego.niveles[Juego.nivelActual].alto) {
+                ganada = true;
+                empate = false;
             }
-           
+
             contador = 0;
             i = i + 1;
         }
@@ -267,24 +379,28 @@ Juego.marcar = function (event) {
     contador = 0;
 
     //VICTORIA O POR VERTICAL
-       if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
+    if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
         var i = 0;
-        while ((i < circulos.length ) && (!ganada) ){
+        while ((i < circulos.length) && (!ganada)) {
             for (var j = 0; j < circulos.length; j++) {
                 if (circulos[i].getAttribute("data-y") == circulos[j].getAttribute("data-y")) {
                     contador = contador + 1;
+
                 }
 
             }
-           if(contador == Juego.niveles[Juego.nivelActual].alto){
-               ganada= true;
-               empate=false;
-           }
+
+
+            if (contador == Juego.niveles[Juego.nivelActual].alto) {
+                ganada = true;
+                empate = false;
+            }
+
             i = i + 1;
-           contador = 0;
+            contador = 0;
         }
-       }
-    
+    }
+
 
     if (ganada) {
         window.alert("ganado vertical O");
@@ -296,22 +412,25 @@ Juego.marcar = function (event) {
 
     contador = 0;
     //VICTORIA O DIAGONAL PRINCIPAL
-   
+
     if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
-        var i=0;
+        var i = 0;
         while (i < circulos.length && (!ganada)) {
             if (circulos[i].getAttribute("data-x") == circulos[i].getAttribute("data-y")) {
 
                 contador = contador + 1;
 
             }
-            if (contador == Juego.niveles[Juego.nivelActual].alto){
+
+
+            if (contador == Juego.niveles[Juego.nivelActual].alto) {
                 ganada = true;
-                empate=false;
+                empate = false;
             }
-            i=i + 1;
+
+            i = i + 1;
         }
-        contador=0;
+        contador = 0;
     }
 
     if (ganada) {
@@ -324,19 +443,22 @@ Juego.marcar = function (event) {
     contador = 0;
 
     //VICTORIA O DIAGONAL OPUESTA
-   if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
+    if (circulos.length >= Juego.niveles[Juego.nivelActual].alto) {
         var i = 0;
         while (i < circulos.length && (!ganada)) {
             if ((Juego.niveles[Juego.nivelActual].alto - circulos[i].getAttribute("data-x") - 1) == circulos[i].getAttribute("data-y")) {
                 contador = contador + 1;
             }
-            if (contador == Juego.niveles[Juego.nivelActual].alto){
+
+
+            if (contador == Juego.niveles[Juego.nivelActual].alto) {
                 ganada = true;
-                empate=false;
+                empate = false;
             }
+
             i = i + 1;
         }
-       contador=0;
+        contador = 0;
     }
 
     if (ganada) {
@@ -357,19 +479,21 @@ Juego.marcar = function (event) {
         if (empate) {
             Juego.reiniciar(equis, circulos);
             window.alert("EMPATE");
-            
+
+
         }
         elementos = 0;
     }
-    
-    ganada=false;//ver
+
+    ganada = false; //ver
+    console.log(ganadora);
 }
 
 
 Juego.generarPuntaje = function (contenedor, bandera) {
     var parrafo = document.createElement("p"),
         parrafo2 = document.createElement("p"),
-        texto, texto2, texto3;
+        texto, texto2, texto3, cuadro;
 
     if (!bandera) {
         jugadorX = prompt("Ingresar nombre jugador X");
@@ -396,38 +520,71 @@ Juego.generarPuntaje = function (contenedor, bandera) {
         contenedor.appendChild(parrafo);
         contenedor.appendChild(parrafo2);
 
+
     }
+
+
 
 }
 
 
 
 Juego.reiniciar = function (equis, circulos) {
-    var hijo, padre;
+    var hijo, padre, sinmarcar = document.querySelectorAll("div.cuadro.borrar"),
+        btn = document.querySelector("div.cuadro.reiniciar"),
+        botones = document.querySelectorAll("div.botonN");
 
 
     for (var i = 0; i < equis.length; i++) {
-        hijo = equis[i].getElementsByTagName("IMG");
-        padre = hijo.item(0).parentNode;
-        padre.removeChild(hijo.item(0));
         equis[i].classList.remove("marcadaX");
-        equis[i].classList.add("sinmarcar");
-        equis[i].addEventListener("click", Juego.marcar);
-
+        equis[i].classList.add("borrar");
     }
 
     for (var i = 0; i < circulos.length; i++) {
-        hijo = circulos[i].getElementsByTagName("IMG");
-        padre = hijo.item(0).parentNode;
-        padre.removeChild(hijo.item(0));
         circulos[i].classList.remove("marcadaO");
-        circulos[i].classList.add("sinmarcar");
-        circulos[i].addEventListener("click", Juego.marcar);
+        circulos[i].classList.add("borrar");
+    }
+
+    sinmarcar = document.querySelectorAll("div.cuadro.sinmarcar");
+    var borrar = document.querySelectorAll("div.cuadro.borrar");
+
+    for (var i = 0; i < sinmarcar.length; i++) {
+
+        sinmarcar[i].removeEventListener("click", Juego.marcar);
 
     }
-    elementos=0;
+
+    btn.addEventListener("click", Juego.volver);
+
+    elementos = 0;
     empate = true;
-    ganada=false;
+    ganada = false;
     equis = [];
     circulos = [];
+    botones[0].addEventListener("click", Juego.nivel0);
+    botones[1].addEventListener("click", Juego.nivel1);
+    botones[2].addEventListener("click", Juego.nivel2);
+    botones[3].addEventListener("click", Juego.nivel3);
 };
+
+Juego.volver = function (event) {
+    var sinmarcar, borrar, padre, hijo, btn = document.querySelector("div.cuadro.reiniciar");
+
+    borrar = document.querySelectorAll("div.cuadro.borrar");
+    for (var i = 0; i < borrar.length; i++) {
+        hijo = borrar[i].getElementsByTagName("IMG");
+        padre = hijo.item(0).parentNode;
+        padre.removeChild(hijo.item(0))
+        borrar[i].classList.remove("borrar");
+        borrar[i].classList.add("sinmarcar");
+    }
+
+    sinmarcar = document.querySelectorAll("div.cuadro.sinmarcar");
+
+    for (i = 0; i < sinmarcar.length; i++) {
+        sinmarcar[i].addEventListener("click", Juego.marcar);
+
+    }
+    btn.removeEventListener("click", Juego.marcar);
+
+}
