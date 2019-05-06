@@ -17,6 +17,7 @@ Pagina.cargarAdministracionVideos = function(contenedorHTML){
         //creo el input que permitira al usuario elegir el video a agregar 
         var input = document.createElement("input");
         input.classList.add("boton"); 
+        input.classList.add("seleccionar"); 
         input.setAttribute("id","video");
         input.setAttribute("type","file");
         input.setAttribute("accept","mp4");
@@ -47,11 +48,6 @@ Pagina.cargarAdministracionVideos = function(contenedorHTML){
         Pagina.contenedor.appendChild(Pagina.seccionAgregarVideo); 
         Pagina.contenedor.appendChild(Pagina.seccionVideoActual);
         Pagina.contenedor.appendChild(Pagina.seccionListaVideos); 
-        
-         //agrego tag <video> a seccionVideoActual.
-        // agrego el titulo
-        Pagina.tituloVideoActual = document.createElement("label");
-        Pagina.seccionVideoActual.appendChild(Pagina.tituloVideoActual);
 
          //agrego los atributos del video en reproduccion, ya que siempre seran las mismas y habra uno solo
         Pagina.videoActual = document.createElement("video"); 
@@ -61,6 +57,10 @@ Pagina.cargarAdministracionVideos = function(contenedorHTML){
          //source.setAttribute("type","video/mp4")
         Pagina.seccionVideoActual.appendChild(Pagina.videoActual);
         Pagina.cantVideos = 0; 
+         
+        // agrego el titulo
+        Pagina.tituloVideoActual = document.createElement("label");
+        Pagina.seccionVideoActual.appendChild(Pagina.tituloVideoActual); 
          
         //bandera que me avisa si ya se empezo a reproducir algun video.
         Pagina.videoEnReproduccion = "false"; 
@@ -79,29 +79,32 @@ Pagina.agregarVideo = function(){
     
     //añado la miniatura que se vera (es el video en si, pero sin propiedades para reproducirlo)
     var miniatura = document.createElement("video");
-    //miniatura.setAttribute("width","40%");
     miniatura.setAttribute("idVideo",Pagina.cantVideos);
     
-    //Agrego evento que selecciona el video en Reproduccion.
-    miniatura.addEventListener("click",function(){
-                                    if (Pagina.videoEnReproduccion == "true"){
-                                        var selecAnt = document.querySelector(".seleccionado");
-                                        selecAnt.classList.remove("seleccionado");                         
-                                    }
-                                    var src = miniatura.getAttribute("src");
-                                    Pagina.videoActual.setAttribute("src",src);
-                                    Pagina.videoActual.setAttribute("idVideo", miniatura.getAttribute("idVideo"));
-                                    
-        
-                                    video.classList.add("seleccionado");                            
-                                    Pagina.videoEnReproduccion = "true";
-                          });
     var dataURL = URL.createObjectURL(Pagina.file.files[0]); 
         miniatura.setAttribute("src",dataURL);   
     
     //creo el label que muestra su nombre
     var nombreVideo = document.createElement("label");    
     nombreVideo.innerHTML = Pagina.file.files[0].name;
+    miniatura.setAttribute("tituloVideo",Pagina.file.files[0].name); 
+    //Agrego evento que selecciona el video en Reproduccion.
+    miniatura.addEventListener("click",function(){
+                                    if (Pagina.videoEnReproduccion == "true"){
+                                        var selecAnt = document.querySelector(".seleccionado");
+                                        if (selecAnt!=null){ selecAnt.classList.remove("seleccionado"); }                        
+                                    }
+                                    var src = miniatura.getAttribute("src");
+                                    Pagina.videoActual.setAttribute("src",src);
+                                    Pagina.videoActual.setAttribute("idVideo", miniatura.getAttribute("idVideo"));
+                                    var numVideo= miniatura.getAttribute("idVideo")-1;
+                                    Pagina.tituloVideoActual.innerHTML=miniatura.getAttribute("tituloVideo");
+        
+                                    video.classList.add("seleccionado");                            
+                                    Pagina.videoEnReproduccion = "true";
+                          });
+    
+    
     
     //creo el boton para sacarlo de la lista de reproduccion cuando el usuario desee
     var botonEliminar = document.createElement("button");
@@ -109,9 +112,10 @@ Pagina.agregarVideo = function(){
     botonEliminar.classList.add("quitar");
     botonEliminar.innerHTML = "X";
     botonEliminar.addEventListener("click",function(){
-                                                if (Pagina.videoActual.getAttribute("idvideo")==miniatura.getAttribute("idvideo")){
+                                                if (Pagina.videoActual.getAttribute("idVideo")==miniatura.getAttribute("idVideo")){
                                                     Pagina.videoActual.setAttribute("src","");
                                                     Pagina.videoEnReproduccion="false";
+                                                    Pagina.tituloVideoActual.innerHTML="";
                                                 }
                                                 Pagina.seccionListaVideos.removeChild(video);
                                           });
