@@ -1,5 +1,27 @@
 @import url(reset.css);
 
+h1{
+    text-align: center;
+    margin: 3px;
+    font-size: 200%;
+    font-family: Arial;
+}
+
+#contenedor{
+    vertical-align: middle;
+    background-color: skyblue;
+    font-family: Arial;
+    text-align:center;
+}
+
+p{
+    margin: 3px;
+    font-size: 150%;
+    text-align:center;
+}
+
+
+
 .taTeTi0 {
    display: grid;
     grid-template-columns: 10vw 10vw 10vw;
@@ -10,11 +32,16 @@
     display: block;
     margin:20px;
     height: 10vh;
-    
-    
+   text-align:center;
 }
 
-.niveles .botonN {
+.mensajes{
+    display: inline-block;
+    width: 30%;
+}
+
+
+.niveles .botonN, button {
 	-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
 	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
 	box-shadow:inset 0px 1px 3px 0px #91b8b3;
@@ -53,6 +80,7 @@
   background-color:white;
   border: 2px solid black;
 }
+
 .puntaje .cuadro.reiniciar{
     
   background-color: red;
@@ -68,8 +96,6 @@
   
 }
 
-
-
 .taTeTi0 .cuadro img {
   width: 10vw;
   height: 10vh;
@@ -78,7 +104,8 @@
 
 
 
-.taTeTi1{
+.taTeTi1
+{
    display: grid;
     grid-template-columns: 10vw 10vw 10vw 10vw;
     grid-template-rows: 10vh 10vh 10vh 10vh;
