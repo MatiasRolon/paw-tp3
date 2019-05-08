@@ -1,5 +1,10 @@
 @import url(reset.css);
 
+
+body{
+    background-color: #CC7018;
+}
+
 h1{
     text-align: center;
     margin: 3px;
@@ -9,9 +14,11 @@ h1{
 
 #contenedor{
     vertical-align: middle;
-    background-color: skyblue;
+    background-color: greenyellow;    
     font-family: Arial;
     text-align:center;
+    display: inline-block;
+    width: 100%;
 }
 
 p{
@@ -20,24 +27,27 @@ p{
     text-align:center;
 }
 
-
-
-.taTeTi0 {
-   display: grid;
-    grid-template-columns: 10vw 10vw 10vw;
-    grid-template-rows: 10vh 10vh 10vh 2vh 2vh;
+.jugadores{
+        text-align: -webkit-center;    
 }
+
+
+.formJugadores label{
+    margin-top: 10px;
+    display: block;
+}
+
+.formJugadores button{
+    display: block;
+    vertical-align: middle;
+}
+
 
 .niveles{
     display: block;
     margin:20px;
     height: 10vh;
    text-align:center;
-}
-
-.mensajes{
-    display: inline-block;
-    width: 30%;
 }
 
 
@@ -71,9 +81,20 @@ p{
 }
 
 
+/*----------------------NIVEL 0-------------------------*/
+
+.taTeTi0 {
+  align-self: center;
+   display: grid;
+    grid-template-columns: 10vw 10vw 10vw;
+    grid-template-rows: 10vh 10vh 10vh;
+    margin-left: 35%;
+    margin-right: 35%;
+}
 
 .taTeTi0 .cuadro {
-
+    
+  justify-content: center;    
   background-color: white;
   text-align: center;
   vertical-align: middle;
@@ -81,31 +102,18 @@ p{
   border: 2px solid black;
 }
 
-.puntaje .cuadro.reiniciar{
-    
-  background-color: red;
-  text-align: center;
-  vertical-align: middle;
-  background-color:white;
-  border: 2px solid black;
-  display: block;
-  width: 10vw;
-  height: 5vh;
-  margin: 10px;
-  
-  
-}
-
 .taTeTi0 .cuadro img {
-  width: 10vw;
-  height: 10vh;
+  width: 9vw;
+  height: 9vh;
   vertical-align: middle;
 }
 
-
+/*----------------------NIVEL 1-------------------------*/
 
 .taTeTi1
 {
+        margin-left: 30%;
+    margin-right: 30%;
    display: grid;
     grid-template-columns: 10vw 10vw 10vw 10vw;
     grid-template-rows: 10vh 10vh 10vh 10vh;
@@ -126,8 +134,12 @@ p{
   height: 9vh;
   vertical-align: middle;
 }
+/*-----------------------------------------------------*/
 
+/*----------------------NIVEL 2-------------------------*/
 .taTeTi2 {
+    margin-left: 25%;
+    margin-right:25%;
 display: grid;
     grid-template-columns: 10vw 10vw 10vw 10vw 10vw;
     grid-template-rows: 10vh 10vh 10vh 10vh 10vh;
@@ -148,9 +160,12 @@ display: grid;
   height: 9vh;
   vertical-align: middle;
 }
+/*------------------------------------------------------*/
 
-
+/*----------------------NIVEL 3-------------------------*/
 .taTeTi3{
+            margin-left: 20%;
+    margin-right: 20%;
     display: grid;
     grid-template-columns: 10vw 10vw 10vw 10vw 10vw 10vw;
     grid-template-rows: 10vh 10vh 10vh 10vh 10vh 10vh;
@@ -173,3 +188,75 @@ display: grid;
   height: 9vh;
   vertical-align: middle;
 }
+
+/*------------------------------------------------------*/
+
+/*-------------------SECCION MENSAJES------------------*/
+.mensajes{
+    display: inline-block;
+    width: 30%;
+}
+/*----------------------------------------------------*/
+
+/*---------------------SECCION PUNTAJES--------------*/
+
+.puntaje.no-visible{
+    display: none;
+}
+
+.puntaje{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 10vh 10vh 10vh;
+    margin-left: 35%;
+    margin-right: 35%;
+    border: solid 2px;
+    background-color: white;
+    margin-bottom: 5px;
+}
+
+.puntaje .cuadro.reiniciar{
+  background-color: red;
+  text-align: center;
+  vertical-align: middle;
+  background-color:white;
+  border: 2px solid black;
+  display: block;
+  width: 10vw;
+  height: 5vh;
+  margin: 10px;
+}
+
+.puntaje .celda{
+    border: solid 2px;
+}
+
+.celda.nombre{
+    background-color: white;
+}
+
+.celda.iconoX{
+    background-image: url("images/X.png");
+        background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.celda.iconoO{
+    background-image: url("images/O.png");
+    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.turnoActual{
+    background-color: #91FF7F;
+}
+
+/*------------------------------------------------------*/
+
+
+
+
+
+
+

@@ -41,6 +41,7 @@ Juego.Armar = function (contenedor) {
         bSection.classList.add("niveles");
         tSection.classList.add("taTeTi" + Juego.nivelActual);
         nSection.classList.add("puntaje");
+        nSection.classList.add("no-visible"); 
         jSection.classList.add("jugadores");
         Juego.confJugadores(jSection);
         console.log(tSection);
@@ -131,7 +132,7 @@ Juego.empezar = function (event) {
 Juego.generarMensajesReinicio = function (contenedor) {
     var cuadro = document.createElement("button"),
         texto = document.createElement("p");
-    mensaje = "Turno X "+jugadorX;
+    mensaje = " ";
     cuadro.classList.add("cuadro");
     cuadro.classList.add("continuar");
     cuadro.textContent = "continuar";
@@ -268,12 +269,14 @@ Juego.marcar = function (event) {
     botones[2].removeEventListener("click", Juego.nivel2);
     botones[3].removeEventListener("click", Juego.nivel3);
 
+    var turnAnt,turnAct;
+    
     console.log(cuadros);
     cuadro.classList.remove("sinmarcar");
     c = c + 1;
     if (turno % 2 == 0) {
         imagenO = document.createElement("img");
-        imagenO.setAttribute("src", "images/O.jpg");
+        imagenO.setAttribute("src", "css/images/O.png");
         cuadro.setAttribute("value", "O");
         cuadro.classList.add("marcadaO");
         cuadro.appendChild(imagenO);
@@ -281,10 +284,15 @@ Juego.marcar = function (event) {
         turno = turno + 1;
         elementos = elementos + 1;
         circulos = document.querySelectorAll("div.cuadro.marcadaO");
-        msj.textContent = "Turno X "+jugadorX;
+
+         turnAnt = document.querySelector(".turnoActual");
+        if (turnAnt!=null) {   turnAnt.classList.remove("turnoActual")}
+         turnAct = document.querySelector(".celda.iconoX");
+        turnAct.classList.add("turnoActual");
+        
     } else {
         imagenX = document.createElement("img");
-        imagenX.setAttribute("src", "images/X.jpg");
+        imagenX.setAttribute("src", "css/images/X.png");
         cuadro.setAttribute("value", "X");
         cuadro.classList.add("marcadaX");
         cuadro.appendChild(imagenX);
@@ -292,7 +300,11 @@ Juego.marcar = function (event) {
         turno = turno + 1;
         equis = document.querySelectorAll("div.cuadro.marcadaX");
         elementos = elementos + 1;
-        msj.textContent = "Turno O "+jugadorO;
+        
+         turnAnt = document.querySelector(".turnoActual");
+        if (turnAnt!=null) {   turnAnt.classList.remove("turnoActual")}
+         turnAct = document.querySelector(".celda.iconoO");
+        turnAct.classList.add("turnoActual");
     }
 
     console.log(ganada);
@@ -589,29 +601,69 @@ Juego.marcar = function (event) {
 
 
 Juego.generarPuntaje = function (contenedor, bandera) {
-    var parrafo = document.createElement("p"),
-        parrafo2 = document.createElement("p"),
-        texto, texto2, texto3, cuadro;
 
     contenedor = document.querySelector("section.puntaje");
-
+    contenedor.classList.remove("no-visible");
+    
+        var col = document.createElement("div");
+        var col1 = document.createElement("div");
+        var col2 = document.createElement("div");
+        var col3 = document.createElement("div");
+        var col4 = document.createElement("div");
+        var col5 = document.createElement("div");
+        
+    
     if (!bandera) {
-        texto = document.createTextNode("JugadorO: " + jugadorO + "     PUNTAJE: " + puntajeO);
-        texto2 = document.createTextNode("JugadorX: " + jugadorX + "     PUNTAJE: " + puntajeX);
-        parrafo.appendChild(texto2);
-        parrafo2.appendChild(texto);
-        contenedor.appendChild(parrafo);
-        contenedor.appendChild(parrafo2);
+        
+        contenedor.appendChild(col);
+        contenedor.appendChild(col1);
+        contenedor.appendChild(col2);
+        contenedor.appendChild(col3);
+        contenedor.appendChild(col4);
+        contenedor.appendChild(col5);
+        
+        col.classList.add("celda");
+        col.classList.add("nombre");
+        col.innerHTML = jugadorO;
+        col1.classList.add("celda");
+        col1.classList.add("nombre");
+        col1.innerHTML = jugadorX;
+        
+        col2.classList.add("celda");
+        col2.classList.add("iconoO");
+        col3.classList.add("celda");
+        col3.classList.add("iconoX");
+        
+        col4.classList.add("celda");
+        col4.classList.add("puntosO");
+        var parrafo4 = document.createElement("p");
+        parrafo4.textContent = puntajeO;    
+        col4.appendChild(parrafo4);
+        
+        col5.classList.add("celda");
+        col5.classList.add("puntosX");
+        var parrafo5 = document.createElement("p");
+        parrafo5.textContent = puntajeX;    
+        col5.appendChild(parrafo5);
+        
+       
     } else {
-
-        contenedor.removeChild(contenedor.firstChild);
-        contenedor.removeChild(contenedor.firstChild);
-        parrafo.textContent = "JugadorX: " + jugadorX + "     PUNTAJE: " + puntajeX;
-        parrafo2.textContent = "JugadorO: " + jugadorO + "     PUNTAJE: " + puntajeO;
-        contenedor.appendChild(parrafo);
-        contenedor.appendChild(parrafo2);
-
-
+        var parrafoAct;
+        
+        var resultO = document.querySelector(".celda.puntosO");
+        resultO.removeChild(resultO.firstChild);
+        
+        parrafoAct = document.createElement("p");
+        parrafoAct.textContent = puntajeO;    
+        resultO.appendChild(parrafoAct);
+        
+        var resultX = document.querySelector(".celda.puntosX");
+        resultX.removeChild(resultX.firstChild);
+        
+        parrafoAct = document.createElement("p");
+        parrafoAct.textContent = puntajeX;    
+        resultX.appendChild(parrafoAct);
+        
     }
 
 
@@ -680,10 +732,10 @@ Juego.volver = function (event) {
     }
     btn.removeEventListener("click", Juego.marcar);
 
-     if (turno % 2 == 0) {
+    /* if (turno % 2 == 0) {
          msj.textContent = "Turno O "+jugadorO;
      }else{
          msj.textContent = "Turno X"+jugadorX;
-     }
+     }*/
     
 }

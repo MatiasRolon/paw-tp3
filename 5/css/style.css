@@ -9,7 +9,7 @@ body{
 
 #contenedor{
     height: 100%;
-    width: 100%;
+    width: auto;
 }
 
         .carrusel{
@@ -72,11 +72,12 @@ body{
 
 .li-imagen.activa{
     z-index: 2;
+    
 }
 
 .img-imagen{
     width: 100%;
-    height: 100%;   
+    height: 100%;
 }
 
 
