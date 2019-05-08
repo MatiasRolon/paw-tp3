@@ -65,7 +65,6 @@ Pagina.cargarAdministracionVideos = function(contenedorHTML){
         //bandera que me avisa si ya se empezo a reproducir algun video.
         Pagina.videoEnReproduccion = "false"; 
      });
-    
 }
 
 

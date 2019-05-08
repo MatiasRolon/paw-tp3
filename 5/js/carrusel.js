@@ -17,9 +17,17 @@ Pagina.cargarCarrusel = function(contenedorHTML){
         Pagina.cargarElementos();
      });
     
-    //CORREGIR> DETECTA CUANDO SE APRETARON LAS FLECHAS DEL TECLADO.
+    //CORREGIR> DETECTA CUANDO SE APRETARON LAS FLECHAS DEL adaTECLADO.
     window.addEventListener("keypress",function(event){
             console.log("se presiono: "+ event.keyCode);
+            if (event.keyCode==97){// si presiona la tecla A
+                Pagina.anterior();
+                Pagina.pasarImagen(animaciones[0]);
+            }
+            if (event.keyCode==100){//si presiona la tecla D
+                Pagina.siguiente();
+                Pagina.pasarImagen(animaciones[1]);
+            }
         });
 }
 
