@@ -1,11 +1,7 @@
 @import url(reset.css);
 
-.botonera{
-    display: inline-block;
-    width:50vw;
-}
 
-.botonera .boton {
+.boton {
 margin:20px;
   text-shadow: 1px 1px 3px #666666;
   font-family: Arial;
@@ -15,7 +11,7 @@ margin:20px;
   text-decoration: none;
 }
 
-.botonera .boton:hover {
+.boton:hover {
   background: #92999e;
   text-decoration: none;
 }
@@ -36,7 +32,7 @@ margin:20px;
 
 .bloqueCompletar{
     display: grid;
-    grid-template-rows: 20px 20px 20px;
+    grid-template-rows: 20px 20px ;
     width: 30px;
     border: solid 1px;
 }
@@ -63,7 +59,7 @@ margin:20px;
 .muestra{
     display: grid;
     margin: 50px;
-    grid-template-columns: repeat(auto-fill, 30px);
+    grid-template-columns: repeat(auto-fill, 35px);
 }
 
 .guion{
@@ -81,6 +77,9 @@ margin:20px;
 .cuadroRespuesta{
     display: grid;
     border: solid 1px;
+    width: 35px;
+    margin:1px;
+    height: 50px;
     
 }
 
