@@ -77,13 +77,9 @@ criptograma.comprobar = function (event) {
         letras = criptograma.abecedario,
         camposR = document.querySelectorAll("label.letraNoDisplay");
 
-    console.log(camposR);
     for (var i = 0; i < letras.length; i++) {
-
-
         if (campos[i].value.toUpperCase() == letras[i].letra) {
             campos[i].setAttribute("disabled", "true");
-
             for (var j = 0; j < camposR.length; j++) {
                 if (camposR[j].textContent == campos[i].value.toUpperCase()) {
                     camposR[j].classList.remove("letraNoDisplay");
@@ -91,6 +87,8 @@ criptograma.comprobar = function (event) {
 
                 }
             }
+        }else{
+            campos[i].value ="";
         }
     }
 
@@ -99,11 +97,7 @@ criptograma.comprobar = function (event) {
 
 criptograma.juegoGrilla = function (contenedor, letras) {
 
-    /*
-    letras.sort(function () {
-        return Math.random() - 0.5
-    });
-*/
+   
     for (var i = 0; i < letras.length; i++) {
         var bloq = document.createElement("div");
         bloq.classList.add("bloqueCompletar");
@@ -120,7 +114,6 @@ criptograma.juegoGrilla = function (contenedor, letras) {
         posicion.textContent = i + 1;
         bloq.appendChild(simbolo);
         bloq.appendChild(campo);
-      //  bloq.appendChild(posicion);
         contenedor.appendChild(bloq);
 
     }
@@ -201,7 +194,7 @@ criptograma.elegirCriptografo0 = function (event) {
         menuc = document.createElement("div"),
         boton0, boton1, boton2;
 
-    frase = "FRASE UNO";
+    frase = "DISFRUTA LAS PEQUEÑAS COSAS";
     menuc.classList.add("menu2");
     menu.removeChild(menub);
     boton0 = document.createElement("button");
@@ -228,7 +221,7 @@ criptograma.elegirCriptografo1 = function (event) {
         menuc = document.createElement("div"),
         boton0, boton1, boton2;
 
-    frase = "FRASE DOS";
+    frase = "LA VIDA ES COMO UNA CAJA DE BOMBONES. NUNCA SABES QUE TE PUEDE TOCAR";
     menuc.classList.add("menu2");
     menu.removeChild(menub);
     boton0 = document.createElement("button");
@@ -255,7 +248,7 @@ criptograma.elegirCriptografo2 = function (event) {
         menuc = document.createElement("div"),
         boton0, boton1, boton2;
 
-    frase = "FRASE TRES";
+    frase = "ME ENCANTA EL OLOR A NAPALM POR LA MAÑANA";
     menuc.classList.add("menu2");
     menu.removeChild(menub);
     boton0 = document.createElement("button");
@@ -282,7 +275,7 @@ criptograma.elegirCriptografo3 = function (event) {
         menuc = document.createElement("div"),
         boton0, boton1, boton2;
 
-    frase = "FRASE CUATRO";
+    frase = "QUE LA FUERZA TE ACOMPAÑE";
     menuc.classList.add("menu2");
     menu.removeChild(menub);
     boton0 = document.createElement("button");
@@ -309,7 +302,7 @@ criptograma.elegirCriptografo4 = function (event) {
         menuc = document.createElement("div"),
         boton0, boton1, boton2;
 
-    frase = "FRASE CINCO";
+    frase = "LA LIBERTAD ES EL DERECHO A DECIRLE A LA GENTE LO QUE NO QUIERE ESCUCHAR";
     menuc.classList.add("menu2");
     menu.removeChild(menub);
     boton0 = document.createElement("button");
@@ -336,7 +329,7 @@ criptograma.elegirCriptografo5 = function (event) {
         menuc = document.createElement("div"),
         boton0, boton1, boton2;
 
-    frase = "FRASE SEIS";
+    frase = "CUANDO SIENTAS DESEOS DE CRITICAR A ALGUIEN, RECUERDA QUE NO TODO EL MUNDO A TENIDO LAS MISMAS OPORTUNIDADES QUE TU TUVISTE";
     menuc.classList.add("menu2");
     menu.removeChild(menub);
     boton0 = document.createElement("button");
@@ -393,10 +386,7 @@ criptograma.asignarSimbolo = function (contenedor) {
 
             while ((j < abc.length) && (!bandera)) {
 
-                console.log(frase[i]);
-                console.log(abc[j].letra);
-                console.log(abc[j].simbolo);
-                if (frase[i] == " ") {
+                if (frase[i] == " " ) {
                     aux = aux + frase[i];
                     bandera = true;
 
@@ -406,7 +396,7 @@ criptograma.asignarSimbolo = function (contenedor) {
 
 
                         bandera = true;
-                        console.log(aux);
+                        
                     }
                 }
                 j = j + 1;
@@ -485,7 +475,7 @@ criptograma.asignarSimbolo = function (contenedor) {
             bandera = false;
         }
 
-        console.log(aux);
+    
         nodoT = document.createTextNode(aux);
 
         for (i = 0; i < auxn.length; i++) {
@@ -554,7 +544,7 @@ criptograma.asignarSimbolo = function (contenedor) {
             bandera = false;
         }
 
-        console.log(aux);
+     
         nodoT = document.createTextNode(aux);
 
         for (i = 0; i < auxn.length; i++) {
