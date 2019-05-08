@@ -2,7 +2,8 @@
 
 
 body{
-    background-color: #CC7018;
+    background-color: #796DE8;
+    color: aliceblue;
 }
 
 h1{
@@ -14,11 +15,12 @@ h1{
 
 #contenedor{
     vertical-align: middle;
-    background-color: greenyellow;    
+    background-color: #85FFD0;    
     font-family: Arial;
     text-align:center;
     display: inline-block;
     width: 100%;
+    color: black
 }
 
 p{
@@ -51,11 +53,11 @@ p{
 }
 
 
-.niveles .botonN, button {
+button {
 	-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
 	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
 	box-shadow:inset 0px 1px 3px 0px #91b8b3;
-	background-color:#768d87;
+	background-color:#FF6C4C;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
@@ -72,10 +74,10 @@ p{
     margin: 10px;
 }
 
-.niveles .botonN:hover {
+button:hover {
 	background-color:#6c7c7c;
 }
-.niveles .botonN:active {
+button:active {
 	position:relative;
 	top:1px;
 }
@@ -192,9 +194,38 @@ display: grid;
 /*------------------------------------------------------*/
 
 /*-------------------SECCION MENSAJES------------------*/
+.mensajes.no-visible{
+    display: none;
+}
 .mensajes{
-    display: inline-block;
-    width: 30%;
+    position: fixed;
+    display: block;
+    text-align: center;
+    width: auto;
+    padding: 10px;
+    TOP: 20%;
+    LEFT: 30%;
+    RIGHT: 30%;
+    border: solid 5px;
+    border-color: black;
+    background-color: rgba(121, 109, 232, 0.95);
+    color: aliceblue;
+    animation-duration: 1s;
+    animation-name: mostrarGanador;
+}
+
+@keyframes mostrarGanador {
+  from {
+    opacity: 0;
+  }
+    to{
+        opacity: 1;
+    }
+}
+
+.mensajes p{
+    opacity: 1;
+    transition-duration: 0.5s;
 }
 /*----------------------------------------------------*/
 
@@ -207,12 +238,16 @@ display: grid;
 .puntaje{
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 10vh 10vh 10vh;
+    grid-template-rows: 6vh 8vh 8vh;
     margin-left: 35%;
     margin-right: 35%;
     border: solid 2px;
     background-color: white;
     margin-bottom: 5px;
+    margin-top: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .puntaje .cuadro.reiniciar{
@@ -233,6 +268,8 @@ display: grid;
 
 .celda.nombre{
     background-color: white;
+    font-size: 150%;
+    vertical-align: middle;
 }
 
 .celda.iconoX{
@@ -248,8 +285,13 @@ display: grid;
     background-repeat: no-repeat;
 }
 
+.celda.puntosO, .celda.puntosX{
+    font-size: 150%;
+}
+
 .turnoActual{
-    background-color: #91FF7F;
+    background-color: #938AEB;
+    transition-duration: 0.5s;
 }
 
 /*------------------------------------------------------*/

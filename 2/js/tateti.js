@@ -38,6 +38,7 @@ Juego.Armar = function (contenedor) {
             nSection = document.createElement("section");
 
         mSection.classList.add("mensajes");
+        mSection.classList.add("no-visible")
         bSection.classList.add("niveles");
         tSection.classList.add("taTeTi" + Juego.nivelActual);
         nSection.classList.add("puntaje");
@@ -131,15 +132,19 @@ Juego.empezar = function (event) {
 
 Juego.generarMensajesReinicio = function (contenedor) {
     var cuadro = document.createElement("button"),
-        texto = document.createElement("p");
+        textoResultado = document.createElement("p"),
+        textoGanador = document.createElement("p");
     mensaje = " ";
     cuadro.classList.add("cuadro");
     cuadro.classList.add("continuar");
     cuadro.textContent = "continuar";
     contenedor.appendChild(cuadro);
-    texto.classList.add("mensaje");
-    texto.textContent = mensaje;
-    contenedor.appendChild(texto);
+    textoResultado.classList.add("mensajeResultado");
+    textoResultado.textContent = mensaje;
+    textoGanador.classList.add("mensajeGanador");
+    textoGanador.textContent = mensaje;
+    contenedor.appendChild(textoResultado);
+    contenedor.appendChild(textoGanador);
 
 
 }
@@ -148,25 +153,25 @@ Juego.generarMensajesReinicio = function (contenedor) {
 Juego.botonesNiveles = function (contenedor) {
     var btn0, btn1, btn2, btn3;
 
-    btn0 = document.createElement("div");
+    btn0 = document.createElement("button");
     btn0.classList.add("botonN");
     btn0.addEventListener("click", Juego.nivel0);
     btn0.textContent = "NIVEL0";
     contenedor.appendChild(btn0);
 
-    btn1 = document.createElement("div");
+    btn1 = document.createElement("button");
     btn1.classList.add("botonN");
     btn1.addEventListener("click", Juego.nivel1);
     btn1.textContent = "NIVEL1";
     contenedor.appendChild(btn1);
 
-    btn2 = document.createElement("div");
+    btn2 = document.createElement("button");
     btn2.classList.add("botonN");
     btn2.addEventListener("click", Juego.nivel2);
     btn2.textContent = "NIVEL2";
     contenedor.appendChild(btn2);
 
-    btn3 = document.createElement("div");
+    btn3 = document.createElement("button");
     btn3.classList.add("botonN");
     btn3.addEventListener("click", Juego.nivel3);
     btn3.textContent = "NIVEL3";
@@ -260,9 +265,10 @@ Juego.marcar = function (event) {
         equis = document.querySelectorAll("div.cuadro.marcadaX"),
         circulos = document.querySelectorAll("div.cuadro.marcadaO"),
         cuadros = document.querySelectorAll("div.cuadro"),
-        botones = document.querySelectorAll("div.botonN"),
-        ganadora,msj = document.querySelector("p.mensaje");
-
+        botones = document.querySelectorAll(".botonN"),
+        ganadora,msjR = document.querySelector("p.mensajeResultado"),
+        msjG = document.querySelector("p.mensajeGanador");
+        
 
     botones[0].removeEventListener("click", Juego.nivel0);
     botones[1].removeEventListener("click", Juego.nivel1);
@@ -309,7 +315,9 @@ Juego.marcar = function (event) {
 
     console.log(ganada);
     contador = 0;
-
+    
+    var mensajes; // cartel de resultado de la partida
+    
     //VICTORIA X POR HORIZONTAL
 
     if (equis.length >= Juego.niveles[Juego.nivelActual].alto) {
@@ -341,9 +349,10 @@ Juego.marcar = function (event) {
     }
 
     if (ganada) {
-
-
-        msj.textContent =  "VICTORIA X HORIZONTAL PUNTO PARA "+jugadorX;
+        msjR.textContent =  "LINEA X HORIZONTAL COMPLETADA "
+        msjG.textContent =  "VICTORIA PARA " +jugadorX;
+            mensajes = document.querySelector(".mensajes");
+            mensajes.classList.remove("no-visible");
         Juego.reiniciar(equis, circulos);
         puntajeX = puntajeX + 1;
         Juego.generarPuntaje(nSection, true);
@@ -377,7 +386,10 @@ Juego.marcar = function (event) {
 
 
     if (ganada) {
-        msj.textContent =  "VICTORIA X VERTICAL PUNTO PARA "+jugadorX;
+        msjR.textContent =  "LINEA X VERTICAL COMPLETADA "
+        msjG.textContent =  "VICTORIA PARA " +jugadorX;
+        mensajes = document.querySelector(".mensajes");
+        mensajes.classList.remove("no-visible");
         Juego.reiniciar(equis, circulos);
         puntajeX = puntajeX + 1;
         Juego.generarPuntaje(nSection, true);
@@ -411,7 +423,10 @@ Juego.marcar = function (event) {
     }
 
     if (ganada) {
-        msj.textContent =  "VICTORIA X DIAGONAL PRINCIPAL PUNTO PARA "+jugadorX;
+        msjR.textContent =  "LINEA DIAGONAL PRINCIPAL COMPLETADA ";
+        msjG.textContent =  "VICTORIA PARA " +jugadorX;
+            mensajes = document.querySelector(".mensajes");
+            mensajes.classList.remove("no-visible");
         Juego.reiniciar(equis, circulos);
         puntajeX = puntajeX + 1;
         Juego.generarPuntaje(nSection, true);
@@ -442,7 +457,10 @@ Juego.marcar = function (event) {
     }
 
     if (ganada) {
-        msj.textContent =  "VICTORIA X DIAGONAL OPUESTA PUNTO PARA "+jugadorX;
+        msjR.textContent =  "LINEA X DIAGONAL OPUESTA COMPLETADA ";    
+        msjG.textContent =  "VICTORIA PARA " +jugadorX;
+        mensajes = document.querySelector(".mensajes");
+        mensajes.classList.remove("no-visible");
         Juego.reiniciar(equis, circulos);
         puntajeX = puntajeX + 1;
         Juego.generarPuntaje(nSection, true);
@@ -477,7 +495,10 @@ Juego.marcar = function (event) {
     }
 
     if (ganada) {
-        msj.textContent =  "VICTORIA O HORIZONTAL PUNTO PARA "+jugadorO;
+        msjR.textContent =  "LINEA O HORIZONTAL COMPLETADA ";
+        msjG.textContent =  "VICTORIA PARA " +jugadorO;
+        mensajes = document.querySelector(".mensajes");
+        mensajes.classList.remove("no-visible");
         Juego.reiniciar(equis, circulos);
         puntajeO = puntajeO + 1;
         Juego.generarPuntaje(nSection, true);
@@ -510,7 +531,10 @@ Juego.marcar = function (event) {
 
 
     if (ganada) {
-        msj.textContent =  "VICTORIA O VERTICAL PUNTO PARA "+jugadorO;
+        msjR.textContent =  "LINEA O VERTICAL COMPLETADA ";
+        msjG.textContent =  "VICTORIA PARA " +jugadorO;
+        mensajes = document.querySelector(".mensajes");
+        mensajes.classList.remove("no-visible");
         Juego.reiniciar(equis, circulos);
         puntajeO = puntajeO + 1;
         Juego.generarPuntaje(nSection, true);
@@ -524,11 +548,8 @@ Juego.marcar = function (event) {
         var i = 0;
         while (i < circulos.length && (!ganada)) {
             if (circulos[i].getAttribute("data-x") == circulos[i].getAttribute("data-y")) {
-
                 contador = contador + 1;
-
             }
-
 
             if (contador == Juego.niveles[Juego.nivelActual].alto) {
                 ganada = true;
@@ -541,8 +562,10 @@ Juego.marcar = function (event) {
     }
 
     if (ganada) {
-        msj.textContent =  "VICTORIA O DIAGONAL PRINCIPAL PUNTO PARA "+jugadorO;
-
+        msjR.textContent =  "LINEA O DIAGONAL PRINCIPAL COMPLETADA ";
+        msjG.textContent =  "VICTORIA PARA " +jugadorO;
+            mensajes = document.querySelector(".mensajes");
+            mensajes.classList.remove("no-visible");
         Juego.reiniciar(equis, circulos);
         puntajeO = puntajeO + 1;
         Juego.generarPuntaje(nSection, true);
@@ -570,8 +593,10 @@ Juego.marcar = function (event) {
     }
 
     if (ganada) {
-        msj.textContent =  "VICTORIA O DIAGONAL OPUESTA PUNTO PARA "+jugadorO;
-
+        msjR.textContent =  "LINEA O DIAGONAL OPUESTA COMPLETADA ";
+        msjG.textContent =  "VICTORIA PARA " +jugadorO;
+        mensajes = document.querySelector(".mensajes");
+        mensajes.classList.remove("no-visible");
         Juego.reiniciar(equis, circulos);
         puntajeO = puntajeO + 1;
         Juego.generarPuntaje(nSection, true);
@@ -587,10 +612,10 @@ Juego.marcar = function (event) {
 
         if (empate) {
             Juego.reiniciar(equis, circulos);
-            msj.textContent =  "EMPATE";
-
-
-
+            msjR.textContent =  "NO HAY LINEAS COMPLETADAS";
+            msjG.textContent =  "EMPATE ";
+             mensajes = document.querySelector(".mensajes");
+            mensajes.classList.remove("no-visible");
         }
         elementos = 0;
     }
@@ -675,7 +700,7 @@ Juego.generarPuntaje = function (contenedor, bandera) {
 Juego.reiniciar = function (equis, circulos) {
     var hijo, padre, sinmarcar = document.querySelectorAll("div.cuadro.borrar"),
         btn = document.querySelector("button.cuadro.continuar"),
-        botones = document.querySelectorAll("div.botonN");
+        botones = document.querySelectorAll(".botonN");
 
 
     for (var i = 0; i < equis.length; i++) {
@@ -712,6 +737,9 @@ Juego.reiniciar = function (equis, circulos) {
 };
 
 Juego.volver = function (event) {
+    var men = document.querySelector(".mensajes");
+    men.classList.add("no-visible");
+    
     var sinmarcar, borrar, padre, hijo, btn = document.querySelector("button.cuadro.continuar");
 
     borrar = document.querySelectorAll("div.cuadro.borrar");
