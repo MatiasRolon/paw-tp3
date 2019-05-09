@@ -5,7 +5,7 @@
  </ul>
  
 ### Ejemplos de Test 
- Para facilitar el testing del ejercicio de realizaron 2 ejemplos para que el usuario pueda copiarlos y pegarlo en la pantalla principal de carga segun el que desee en cada momento, ahorrandole tiempo.
+ Para facilitar el testing del ejercicio se realizaron 2 ejemplos para que el usuario pueda copiarlos y pegarlos en la pantalla principal de carga segun el que desee en cada momento, ahorrando tiempo en la prueba.
 <br></br>
 -------EJEMPLO 1 : FUTBOL ------------------------------------------------------
 <p>{
