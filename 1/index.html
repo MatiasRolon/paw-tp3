@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>TP 3 - Javascript y CSS</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="buscaminas.js"></script>
-    <script>
-        Juego.cargarJuego("botonJugar","nivel");
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <script src="js/conf.js"></script>
+  <script src="js/buscaminas.js"></script>
+  <script>
+    buscaminas.armar("contenedor");
+
+  </script>
 </head>
+
 <body>
-    
-        <button id="botonJugar"> JUGAR </button>
-        <label for="nivel" >Nivel: </label>
-        
-        <select id="nivel">
-          <option  value="principiante">Principiante</option>
-          <option  value="Intermedio">Intermedio</option>
-          <option  value="Experto">Experto</option>
-        </select>
-        
-        <section id="grilla"> </section>
+  <h1>Buscaminas</h1>
+  <div id="contenedor"></div>
 </body>
+
 </html>

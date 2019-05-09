@@ -1,0 +1,49 @@
+@import url(reset.css);
+
+.oculto{
+    width: 20px;
+    height: 20px;
+    display:none;
+    margin: auto;
+   
+}
+
+.visible{
+    width: 20px;
+    height: 20px;
+    display:block;
+    margin: auto;
+    background: #80808073;
+    margin-top: 5px;
+    
+}
+
+.explotado{
+    background-color: red;
+}
+
+.marcado{
+    background-color: #80808073;
+}
+
+.tableroPrincipiante{
+    display: grid;
+    grid-template-columns: repeat(8,30px);
+    grid-template-rows: repeat(8,30px);
+}
+
+.tableroIntermedio{
+    display: grid;
+    grid-template-columns: repeat(16,30px);
+    grid-template-rows: repeat(16,30px);
+}
+
+.tableroExperto{
+    display: grid;
+    grid-template-columns: repeat(16,30px);
+    grid-template-rows: repeat(30,30px);
+}
+
+.cuadrado{
+    border:solid 1px black;
+}
