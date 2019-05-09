@@ -18,6 +18,13 @@
     
 }
 
+.imagenReinicio{
+    width: 30px;
+    height: 30px;
+    display:block;
+    margin: auto;
+}
+
 .explotado{
     background-color: red;
 }
@@ -30,20 +37,35 @@
     display: grid;
     grid-template-columns: repeat(8,30px);
     grid-template-rows: repeat(8,30px);
+    margin: auto;
 }
 
 .tableroIntermedio{
     display: grid;
     grid-template-columns: repeat(16,30px);
     grid-template-rows: repeat(16,30px);
+    margin: auto;
 }
 
 .tableroExperto{
     display: grid;
     grid-template-columns: repeat(16,30px);
     grid-template-rows: repeat(30,30px);
+    margin: auto;
+}
+
+.principal{
+display: grid;    
+    
 }
 
 .cuadrado{
     border:solid 1px black;
+}
+
+.opcion{
+    border: solid 1px black;
+    width: 150px;
+    text-align: center;
+    margin: auto;
 }
