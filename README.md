@@ -30,7 +30,24 @@ Trabajo Practico N°3 de Programacion en Ambiente Web - UNLu
 <p> Son caracteristicas adicionales de los selectores con una sintaxis especial que se usan para poder aplicar estilos a algunos elementos particulares, con caracteristicas que no captan los selectores comunes. Referencian partes mas concretas de un elemento  seleccionado siguiendo un patron como "Lo que viene despues de", o "la primera linea de". </p>
 <br>
 <p><b>6) ¿Cómo se calcula la prioridad de una regla CSS? Expresarlo como una fórmula matemática.</b></p>
-<p> RESPUESTA </p>
+<p> 
+Para calcular la prioridad de una regla CSS se deben tener en cuenta las siguientes reglas. Tendrán mayor prioridad los estilos marcados como !important. SI hay varios estilos marcados como !important se elegirá al de mayor peso. 
+El peso está dado por la cantidad de selectores que posea el estilo:<br>
+Peso = ABC (número de 3 cifras, cada una de las cuales se calcula contando los selectores de cada tipo según se indica a continuación)
+A = nº de selectores de ID (selectores que acceden al atributo “id” del elemento mediante “#”)<br>
+B = nº de selectores de CLASE (selectores que acceden al atributo “class” del elemento mediante “.”)<br>
+C = nº de selectores de HTML (selectores que acceden al tag html)<br>
+Ejemplos ordenados de más a menos peso:<br>
+#id1 .clase1 a (A=1, B=1, C=1 –> peso = 111)<br>
+div#id1 a (A=1, B=0, C=2 –> peso = 102)<br>
+.clase1 li.clase2 a (A=0, B=2, C=2 –> peso = 22)<br>
+.clase1 (A=0, B=1, C=0 –> peso = 10)<br>
+div a (A=0, B=0, C=2 –> peso = 2)<br>
+En segundo lugar, luego de los estilos marcados !important, se toma en cuenta el origen de las reglas. Las reglas del autor de la web prevalecerán sobre las reglas del lector de similar peso. Y ambas prevalecen sobre las reglas del navegador.
+En caso de coincidir en el peso se da prioridad a la última regla establecida.
+ 
+!important>reglas del autor>reglas del lector> reglas del navegador.
+ </p>
 <br>
 <p><b>7) ¿Qué es el view port? ¿Cómo se configura? ¿qué problema soluciona?</b></p>
 <p> Es una ventana grafica que representa la parte visible del contenido en la pantalla del navegador. Es un tamaño teórico que tiene la pantalla ya que no tiene que coincidir necesariamente con su resolución real (pixeles en pantalla).</p>
@@ -41,17 +58,45 @@ Trabajo Practico N°3 de Programacion en Ambiente Web - UNLu
 
 <p><b>8) ¿Qué son las media querys? Enumere los distintos tipos de medios y las principales
 características de cada uno de ellos.</b></p>
-<p> RESPUESTA </p>
+<p> Las media query son una técnica de CSS introducida en CSS3. Incluyen un bloque de propiedades solo si es verdadera una determinada condición, utilizando la regla @media.
+Son útiles cuando se desea ajustar la aplicación o página web a diferentes tipos de dispositivos contemplando que el tamaño de pantalla u otras características son diferentes entre los mismos.
+
+Los tipos de medios son los que describen la categoría general de un dispositivo. Entre ellos se encuentran:
+
+- All: Apto para todos los dispositivos
+- Print: Destinado a documentos vistos en una pantalla en modo de vista previa de impresión.
+- Screen: Destinado principalmente a pantallas color de computadoras, tablets, Smart-phones, etc.
+- Speech: Destinado para lectores de pantalla que leen la página en voz alta.
+- Braille: Dispositivos tactiles con braille.
+- Embossed: Usada para las impresoras de braille paginadas.
+- Handheld: usada para dispositivos de mano.
+- Projection: Usada para presentaciones proyectadas, como las diapositivas.
+- Tty: Usada para medios que usen una grilla de caracteres con ancho fijo, como las terminales.
+ </p>
 <br>
 <p><b>9) ¿En qué circunstancias se pueden utilizar las variables css? ¿Qué problemas pueden traer
 aparejadas? ¿Cuándo consideras que sería bueno utilizarlas?</b></p>
-<p> RESPUESTA </p>
+<p> Las variables CSS se utilizan cuando se desea definir un mismo valor para que lo utilicen múltiples selectores. Su uso es beneficioso en el momento que el valor de la variable se quiera modificar, permitiendo que solo modificando la variable los cambios se realicen en cada selector donde se esté utilizando.
+Declaración de una variable:<br>
+elemento { --main-bg-color: brown; }<br>
+Utilización de la variable:<br>
+elemento { background-color: var(--main-bg-color);<br> 
+ 
+La desventaja de las variables consiste en que si su nombramiento no es descriptivo, el uso de una gran cantidad de variables puede generar dificultad a la hora de la lectura del documento. 
+El problema principal del uso de las variables es que algunos browsers no las soportan completamente.
+ </p>
 <br>
 <p><b>10) CSS Grid Layout ¿Qué es? Explicar las reglas que intervienen en el armado de una grilla.
 ¿Qué ventajas y desventajas tiene frente a otros Layouts?</b></p>
-<p> RESPUESTA </p>
+<p> CSS Grid Layout es un módulo que permite la distribución de los elementos de las páginas web teniendo en cuenta dos dimensiones(filas,columnas). 
+Para el armado de la grilla se define un elemento contenedor mediante display:grid, para definir la cantidad de columnas y filas se utiliza grid-template-columns y grid-template-rows  respectivamente. Y para colocar los elementos hijos en la grilla se utiliza grid-columny grid-row.
+CSS puede colocarlos en cualquier orden facilitando la reorganización de la grilla mediante media.querys. Frente a otros layouts tiene la ventaja de poder ordenar sus elementos sin la necesidad de la utilización de propiedades como float o position.
+Puede ser no apto para diseños responsive.
+ </p>
 <br>
 <p><b>11) ¿Qué puntos en común y en que se diferencian las Material Design Guidelines de Google y
 las Human Interface Guidelines de Apple?</b></p>
-<p> RESPUESTA </p>
+<p> Ambas guías buscan la implementación de buenas prácticas para desarrollar aplicaciones que sean de uso fácil para el usuario final. Para lograr esto coinciden en el uso inteligente de colores para resaltar los elementos funcionales para el usuario, texto legible, iconos que representen cual es su función. Buscan realizar transiciones entre páginas permitiendo al usuario saber en todo momento en que sitio se encuentra. <br>
+Se diferencian en elementos de diseño como, por ejemplo, la cantidad de botones para controles generales de flujo, en el caso de Android posee 3 botones mientras que ios posee 2. O también, en los títulos de las aplicaciones o sus secciones siendo que en ios están resaltados con negrita. 
+ </p>
 <br>
