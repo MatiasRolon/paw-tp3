@@ -26,34 +26,50 @@ label{
     position:relative;
     background-color: #01A8A1;
     border-color: black;
+    
+    border-radius: 5px;
+}
+
+.boton.seleccionar{
+    margin-right: 15%;
 }
 
 .agregarVideos{
     margin-bottom: 10px;
     border: solid 2px;
+        border-radius: 8px;
     display: inline-block;
      background-color: #01A8A1;
     margin-left: 59%;
-    width: 41%;
+    width: 40%;
 }
 
 /*--------- SECCION VIDEO ACTUAL ----------*/
 .videoActual{
     display: block;
     float: left;
-    width:58%;
+    width:57%;
+    background-color: #01A8A1;
     position: absolute;
+    border: solid 2px;
+    border-radius: 8px;
+    align-items: center;
+    text-align: -webkit-center;
+    padding-top: 5px;
+    overflow: hidden:
 }
 
 .videos.videoActual label{
     width: 91%;
     height: 20%;
+    background-color: #3893F5;
     font-size: 150%;
     margin-left: 0px;
     margin-bottom: 5px;
     padding: 10px;
     margin: 3px;
     border: solid 3px;
+    border-radius: 8px;
 }
 /*--------- --------------- ----------*/
 /*--------- -------------- ----------*/
@@ -62,9 +78,9 @@ label{
     position: absolute;
     left: 59%;
     width: 40%;
-    height: 90%;
+    height: 89%;
     overflow: scroll;
-    
+    border-radius: 8px;
     border:  solid 2px;
 }
 

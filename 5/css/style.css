@@ -5,12 +5,14 @@
 /*----------SECCIONES-------*/
 body{
     width: auto;
+    margin: 0%;
 }
 
 #contenedor{
     height: 100%;
     width: 100%;
     margin-right: 0px;
+    position: absolute;
 }
 
         .carrusel{
@@ -30,7 +32,7 @@ body{
                 }
                 .thumbs{
                     display:flex;
-                    position: relative;
+                    position: absolute;
                     left: 45%;
                 }
 /*------------------------*/

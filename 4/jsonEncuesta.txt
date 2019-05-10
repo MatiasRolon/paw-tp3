@@ -16,7 +16,7 @@
 "correctas": [0, 1]
 },
 {
-"pregunta": "¿Por que años gano Lionel Messi el Balon de Oro?",
+"pregunta": "¿Que años gano Lionel Messi el Balon de Oro?",
 "respuestas": ["2018", "2015", "2010", "2009"],
 "correctas": [1,2,3]
 },
