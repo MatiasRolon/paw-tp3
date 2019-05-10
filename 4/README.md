@@ -5,8 +5,8 @@
  </ul>
  
 ### Ejemplos de Test 
-<p> Para facilitar el testing del ejercicio de realizaron 2 ejemplos para que el usuario pueda copiarlos y pegarlo en la pantalla principal de carga segun el que desee en cada momento, ahorrandole tiempo.</p>
-
+ Para facilitar el testing del ejercicio se realizaron 2 ejemplos para que el usuario pueda copiarlos y pegarlos en la pantalla principal de carga segun el que desee en cada momento, ahorrando tiempo en la prueba.
+<br></br>
 -------EJEMPLO 1 : FUTBOL ------------------------------------------------------
 <p>{
 "titulo": "Futbol",
@@ -26,7 +26,7 @@
 "correctas": [0, 1]
 },
 {
-"pregunta": "¿Por que años gano Lionel Messi el Balon de Oro?",
+"pregunta": "¿Que años gano Lionel Messi el Balon de Oro?",
 "respuestas": ["2018", "2015", "2010", "2009"],
 "correctas": [1,2,3]
 },
