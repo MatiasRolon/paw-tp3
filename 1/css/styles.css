@@ -1,5 +1,11 @@
 @import url(reset.css);
 
+body{
+    background-color: #A38DCC;
+    text-align: center;
+    color: aliceblue;
+}
+
 .oculto{
     width: 20px;
     height: 20px;
@@ -13,9 +19,14 @@
     height: 20px;
     display:block;
     margin: auto;
-    background: #80808073;
+    background: #FFF58C;
+    box-shadow: 0 0 15px #ddd;
     margin-top: 5px;
     
+}
+
+.reinicio{
+    margin: 5px;
 }
 
 .imagenReinicio{
@@ -49,7 +60,7 @@
 
 .tableroExperto{
     display: grid;
-    grid-template-columns: repeat(16,30px);
+    grid-template-columns: repeat(30,30px);
     grid-template-rows: repeat(30,30px);
     margin: auto;
 }
@@ -61,11 +72,38 @@ display: grid;
 
 .cuadrado{
     border:solid 1px black;
+    background-color: #FFC400;
+}
+
+.menu{
+    
+}
+.lista{
+    height: 10vh;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .opcion{
-    border: solid 1px black;
-    width: 150px;
+    background-color: #370F80;
+    display: block;
+    border: solid 3px aliceblue;
     text-align: center;
     margin: auto;
+    width: 30%;
+    height: 100%;
+}
+
+
+.opcion:hover{
+    background-color: #5800FF;
+}
+
+.opcion:active{
+    font-size: 
+}
+
+.opcion p {
+    margin-top: 15px;
+    color: aliceblue;
 }

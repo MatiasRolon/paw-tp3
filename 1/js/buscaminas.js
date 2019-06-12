@@ -3,7 +3,7 @@ var buscaminas = buscaminas || {},
     console = console || {},
     window = window || {};
 
-buscaminas.nivelActual = 2;
+buscaminas.nivelActual =0 ;
 
 buscaminas.armar = function (contenedor) {
     buscaminas.contenedor = contenedor;
@@ -30,19 +30,26 @@ buscaminas.generarMenu = function () {
     ul.classList.add("lista");
     var opcion = document.createElement("li");
     opcion.classList.add("opcion");
-    opcion.innerHTML = "Principiante";
+    var text = document.createElement("p");
+    text.innerHTML = "Principiante";
+    opcion.appendChild(text);
     opcion.setAttribute("value", 0);
     opcion.addEventListener("click", buscaminas.seleccion);
+    
     ul.appendChild(opcion);
     var opcion = document.createElement("li");
     opcion.classList.add("opcion");
-    opcion.innerHTML = "Intermedio";
+    text = document.createElement("p");
+    text.innerHTML = "Intermedio";
+    opcion.appendChild(text);
     opcion.setAttribute("value", 1);
     opcion.addEventListener("click", buscaminas.seleccion);
     ul.appendChild(opcion);
     var opcion = document.createElement("li");
     opcion.classList.add("opcion");
-    opcion.innerHTML = "Avanzado";
+    text = document.createElement("p");
+    text.innerHTML = "Avanzado";
+    opcion.appendChild(text);
     opcion.setAttribute("value", 2);
     opcion.addEventListener("click", buscaminas.seleccion);
     ul.appendChild(opcion);
